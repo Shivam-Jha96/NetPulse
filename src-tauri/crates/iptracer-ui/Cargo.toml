@@ -1,0 +1,19 @@
+[package]
+name = "iptracer-ui"
+version = "1.0.0"
+edition = "2021"
+authors = ["NetPulse Core Engineering Team"]
+description = "Tauri v2 application harness, IPC command bridge, and micro-batched event emitter"
+
+[dependencies]
+iptracer-core = { path = "../iptracer-core" }
+iptracer-net = { path = "../iptracer-net" }
+iptracer-geo = { path = "../iptracer-geo" }
+iptracer-daemon = { path = "../iptracer-daemon" }
+tauri = { version = "2.2", features = [] }
+tokio = { version = "1.40", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tracing = "0.1"
+uuid = { version = "1.10", features = ["v4"] }
+chrono = { version = "0.4" }
