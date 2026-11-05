@@ -1,0 +1,175 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://iptracer.app/schemas/v1/dns_inspector_schema.json",
+  "title": "DNSInspectionResult",
+  "description": "Schema definition for DNS record inspection, DNSSEC chain-of-trust verification, and global resolver propagation matrix.",
+  "type": "object",
+  "required": [
+    "domain",
+    "queryType",
+    "responseTimeMs",
+    "dnssecStatus",
+    "records",
+    "propagation"
+  ],
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Queried domain name (FQDN)."
+    },
+    "queryType": {
+      "type": "string",
+      "description": "Requested DNS record type (e.g. 'A', 'AAAA', 'MX', 'TXT', 'ANY')."
+    },
+    "transport": {
+      "type": "string",
+      "enum": ["UDP_TCP", "DOH", "DOT"],
+      "description": "Transport protocol utilized for the query."
+    },
+    "authoritativeServer": {
+      "type": ["string", "null"],
+      "description": "Authoritative nameserver responding to the query."
+    },
+    "responseTimeMs": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Query round-trip latency in milliseconds."
+    },
+    "dnssecStatus": {
+      "type": "object",
+      "description": "Cryptographic DNSSEC chain-of-trust validation status.",
+      "required": ["isValid", "state", "details"],
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "True if cryptographic trust chain back to root trust anchor is verified."
+        },
+        "state": {
+          "type": "string",
+          "enum": ["SECURE", "INSECURE", "BOGUS", "INDETERMINATE"],
+          "description": "RFC 4033 DNSSEC validation classification."
+        },
+        "keyAlgorithm": {
+          "type": ["string", "null"],
+          "description": "Cryptographic signing algorithm (e.g. 'ED25519', 'ECDSAP256SHA256', 'RSASHA256')."
+        },
+        "details": {
+          "type": "string",
+          "description": "Human-readable diagnostic summary of the DNSSEC validation state."
+        }
+      },
+      "additionalProperties": false
+    },
+    "records": {
+      "type": "array",
+      "description": "Array of returned DNS Resource Records (RRset).",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "ttl", "value"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Owner name of the resource record."
+          },
+          "type": {
+            "type": "string",
+            "description": "Record type mnemonic (e.g. 'A', 'AAAA', 'CNAME', 'MX', 'TXT', 'SOA')."
+          },
+          "ttl": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Time-To-Live in seconds."
+          },
+          "value": {
+            "type": "string",
+            "description": "Parsed RDATA content as string."
+          },
+          "priority": {
+            "type": ["integer", "null"],
+            "minimum": 0,
+            "description": "Priority value for MX and SRV records."
+          },
+          "tag": {
+            "type": ["string", "null"],
+            "description": "Tag identifier for CAA records (e.g. 'issue', 'iodef')."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "propagation": {
+      "type": "object",
+      "description": "Global multi-resolver propagation status across geographically distributed vantage points.",
+      "required": [
+        "totalResolvers",
+        "matchedResolvers",
+        "propagationPercentage",
+        "resolverResults"
+      ],
+      "properties": {
+        "totalResolvers": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total number of global recursive resolvers polled."
+        },
+        "matchedResolvers": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of resolvers whose responses match the consensus/authoritative value."
+        },
+        "propagationPercentage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Consensus propagation completion percentage."
+        },
+        "resolverResults": {
+          "type": "array",
+          "description": "Individual resolver check records.",
+          "items": {
+            "type": "object",
+            "required": [
+              "resolverName",
+              "resolverLocation",
+              "status",
+              "values",
+              "latencyMs"
+            ],
+            "properties": {
+              "resolverName": {
+                "type": "string",
+                "description": "Friendly name or provider of the resolver node (e.g. 'Cloudflare Frankfurt')."
+              },
+              "resolverLocation": {
+                "type": "string",
+                "description": "Geographical vantage location (e.g. 'Frankfurt, Germany')."
+              },
+              "countryCode": {
+                "type": ["string", "null"],
+                "description": "ISO two-letter country code of vantage point."
+              },
+              "status": {
+                "type": "string",
+                "enum": ["MATCH", "MISMATCH", "TIMEOUT", "ERROR"],
+                "description": "Resolver response comparison state."
+              },
+              "values": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "List of IP or CNAME values returned by this resolver."
+              },
+              "latencyMs": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Resolver query round-trip latency in milliseconds."
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

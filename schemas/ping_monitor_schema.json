@@ -1,0 +1,179 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://iptracer.app/schemas/v1/ping_monitor_schema.json",
+  "title": "PingSession",
+  "description": "Schema definition for continuous ping telemetry, RFC 3550 statistical jitter, and latency quality monitoring.",
+  "type": "object",
+  "required": [
+    "sessionId",
+    "target",
+    "resolvedIp",
+    "intervalMs",
+    "packetSize",
+    "dfBit",
+    "status",
+    "startTime",
+    "packetsSent",
+    "packetsReceived",
+    "packetsLost",
+    "lossPercent",
+    "currentJitterMs",
+    "rttStats",
+    "history"
+  ],
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "description": "Unique session identifier for the ping task."
+    },
+    "target": {
+      "type": "string",
+      "description": "User-supplied target hostname or IP address."
+    },
+    "resolvedIp": {
+      "type": "string",
+      "description": "Canonical IPv4 or IPv6 address targeted by ICMP Echo packets."
+    },
+    "intervalMs": {
+      "type": "integer",
+      "minimum": 100,
+      "description": "Configured packet transmission interval in milliseconds."
+    },
+    "packetSize": {
+      "type": "integer",
+      "minimum": 8,
+      "maximum": 65507,
+      "description": "ICMP payload size in bytes."
+    },
+    "dfBit": {
+      "type": "boolean",
+      "description": "True if IP Don't Fragment flag was asserted."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["RUNNING", "STOPPED", "PAUSED", "ERROR"],
+      "description": "Active state of the continuous ping session."
+    },
+    "startTime": {
+      "type": "integer",
+      "description": "Unix epoch timestamp in milliseconds when ping session started."
+    },
+    "endTime": {
+      "type": ["integer", "null"],
+      "description": "Unix epoch timestamp in milliseconds when ping session terminated."
+    },
+    "packetsSent": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Cumulative count of ICMP Echo Requests transmitted."
+    },
+    "packetsReceived": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Cumulative count of valid ICMP Echo Replies received."
+    },
+    "packetsLost": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Cumulative count of dropped or timed-out packets."
+    },
+    "lossPercent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Overall packet loss percentage."
+    },
+    "currentJitterMs": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Real-time statistical jitter in milliseconds calculated according to RFC 3550."
+    },
+    "rttStats": {
+      "type": "object",
+      "description": "Aggregated round-trip time statistics in milliseconds.",
+      "required": ["min", "avg", "max", "stdev", "p95"],
+      "properties": {
+        "min": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Minimum observed RTT in milliseconds."
+        },
+        "avg": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Arithmetic mean RTT in milliseconds."
+        },
+        "max": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Maximum observed RTT in milliseconds."
+        },
+        "stdev": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Standard deviation of round-trip latency."
+        },
+        "p95": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "95th percentile latency in milliseconds."
+        },
+        "p99": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "99th percentile latency in milliseconds."
+        }
+      },
+      "additionalProperties": false
+    },
+    "pathMtu": {
+      "type": ["integer", "null"],
+      "minimum": 68,
+      "maximum": 65535,
+      "description": "Discovered maximum transmission unit (MTU) size if PMTU sweep was performed."
+    },
+    "history": {
+      "type": "array",
+      "description": "Ring buffer time-series history of ping sample ticks (capped at 1,000 items).",
+      "items": {
+        "type": "object",
+        "required": ["seq", "status", "timestamp"],
+        "properties": {
+          "seq": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Sequential packet probe index."
+          },
+          "ttl": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "maximum": 255,
+            "description": "Time-To-Live reported in the returning ICMP reply."
+          },
+          "rtt": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Observed round-trip time in milliseconds."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "SUCCESS",
+              "TIMEOUT",
+              "HOST_UNREACHABLE",
+              "NET_UNREACHABLE",
+              "TTL_EXPIRED"
+            ],
+            "description": "Delivery status of this ping probe."
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Unix epoch timestamp in milliseconds when probe was recorded."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

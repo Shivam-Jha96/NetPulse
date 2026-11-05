@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://iptracer.app/schemas/v1/port_scanner_schema.json",
+  "title": "PortScanResult",
+  "description": "Schema definition for high-throughput port scanning, banner grabbing, and service discovery results.",
+  "type": "object",
+  "required": [
+    "target",
+    "targetIp",
+    "scanType",
+    "durationMs",
+    "openCount",
+    "closedCount",
+    "filteredCount",
+    "ports"
+  ],
+  "properties": {
+    "target": {
+      "type": "string",
+      "description": "Target hostname or IP address provided for scanning."
+    },
+    "targetIp": {
+      "type": "string",
+      "description": "Canonical IPv4 or IPv6 address scanned."
+    },
+    "scanType": {
+      "type": "string",
+      "enum": ["TCP_CONNECT", "SYN_STEALTH", "UDP"],
+      "description": "Scanning methodology employed."
+    },
+    "portRange": {
+      "type": "string",
+      "description": "Port range descriptor (e.g. '1-1024', 'top-100', '80,443,8080')."
+    },
+    "concurrency": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of concurrent worker tasks dispatched."
+    },
+    "durationMs": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total elapsed scanning duration in milliseconds."
+    },
+    "totalPortsScanned": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total count of ports evaluated."
+    },
+    "openCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of ports confirmed in OPEN state."
+    },
+    "closedCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of ports confirmed in CLOSED state (RST received)."
+    },
+    "filteredCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Count of ports confirmed in FILTERED state (dropped/timed out)."
+    },
+    "ports": {
+      "type": "array",
+      "description": "Array of evaluated port records.",
+      "items": {
+        "type": "object",
+        "required": ["port", "protocol", "state", "service"],
+        "properties": {
+          "port": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65535,
+            "description": "Transport port number."
+          },
+          "protocol": {
+            "type": "string",
+            "enum": ["TCP", "UDP"],
+            "description": "Layer 4 transport protocol."
+          },
+          "state": {
+            "type": "string",
+            "enum": ["OPEN", "CLOSED", "FILTERED"],
+            "description": "Classification state of the port."
+          },
+          "service": {
+            "type": "string",
+            "description": "Common service identification name (e.g. 'http', 'https', 'ssh', 'mysql')."
+          },
+          "product": {
+            "type": ["string", "null"],
+            "description": "Identified software product name from banner grabbing."
+          },
+          "version": {
+            "type": ["string", "null"],
+            "description": "Software version detected from banner."
+          },
+          "banner": {
+            "type": ["string", "null"],
+            "description": "Raw ASCII banner or greeting returned by the open service."
+          },
+          "tlsInfo": {
+            "type": ["object", "null"],
+            "description": "X.509 TLS certificate attributes if TLS handshake succeeded.",
+            "required": ["subject", "issuer", "validTo"],
+            "properties": {
+              "subject": {
+                "type": "string",
+                "description": "Certificate subject common name."
+              },
+              "issuer": {
+                "type": "string",
+                "description": "Certificate issuing authority."
+              },
+              "validTo": {
+                "type": "string",
+                "description": "Expiration date in ISO 8601 format."
+              },
+              "cipher": {
+                "type": ["string", "null"],
+                "description": "Negotiated TLS cipher suite."
+              },
+              "alpn": {
+                "type": ["string", "null"],
+                "description": "Negotiated ALPN protocol (e.g. 'h2', 'http/1.1')."
+              }
+            },
+            "additionalProperties": false
+          },
+          "latencyMs": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Connection establishment latency in milliseconds."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,193 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://iptracer.app/schemas/v1/traceroute_schema.json",
+  "title": "TracerouteResult",
+  "description": "Schema definition for multi-hop visual traceroute and real-time MTR diagnostic results.",
+  "type": "object",
+  "required": [
+    "target",
+    "resolvedIp",
+    "protocol",
+    "mode",
+    "maxHops",
+    "startTime",
+    "status",
+    "hops"
+  ],
+  "properties": {
+    "target": {
+      "type": "string",
+      "description": "Target hostname or IP address provided for route discovery."
+    },
+    "resolvedIp": {
+      "type": "string",
+      "description": "Target destination IP address resolved via DNS."
+    },
+    "protocol": {
+      "type": "string",
+      "enum": ["ICMP", "UDP", "TCP"],
+      "description": "Transport protocol utilized for probe packets."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["TRACEROUTE", "MTR"],
+      "description": "Operational mode: standard single-pass Traceroute or continuous MTR."
+    },
+    "maxHops": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 64,
+      "description": "Configured maximum Time-To-Live (TTL) probe limit."
+    },
+    "startTime": {
+      "type": "integer",
+      "description": "Unix epoch timestamp in milliseconds when trace began."
+    },
+    "endTime": {
+      "type": ["integer", "null"],
+      "description": "Unix epoch timestamp in milliseconds when trace completed or aborted."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["RUNNING", "COMPLETED", "FAILED", "ABORTED"],
+      "description": "Execution status of the trace session."
+    },
+    "hops": {
+      "type": "array",
+      "description": "Sequential array of discovered hop telemetry records ordered by TTL.",
+      "items": {
+        "type": "object",
+        "required": [
+          "ttl",
+          "ip",
+          "hostname",
+          "lossPercent",
+          "sent",
+          "received",
+          "rttLast",
+          "rttAvg",
+          "rttBest",
+          "rttWorst",
+          "rttStDev"
+        ],
+        "properties": {
+          "ttl": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 64,
+            "description": "Hop Time-To-Live distance index."
+          },
+          "ip": {
+            "type": ["string", "null"],
+            "description": "Discovered router IP address at this hop, or null if firewalled."
+          },
+          "hostname": {
+            "type": ["string", "null"],
+            "description": "Reverse DNS (PTR) hostname for this router node."
+          },
+          "asn": {
+            "type": ["integer", "string", "null"],
+            "description": "Autonomous System Number for the hop IP."
+          },
+          "asnOrg": {
+            "type": ["string", "null"],
+            "description": "Autonomous System Organization name."
+          },
+          "country": {
+            "type": ["string", "null"],
+            "description": "Country where router hop is physically located."
+          },
+          "countryCode": {
+            "type": ["string", "null"],
+            "description": "ISO 3166-1 alpha-2 country code."
+          },
+          "city": {
+            "type": ["string", "null"],
+            "description": "City or metro area where router hop is located."
+          },
+          "latitude": {
+            "type": ["number", "null"],
+            "minimum": -90.0,
+            "maximum": 90.0,
+            "description": "WGS 84 latitude coordinate."
+          },
+          "longitude": {
+            "type": ["number", "null"],
+            "minimum": -180.0,
+            "maximum": 180.0,
+            "description": "WGS 84 longitude coordinate."
+          },
+          "lossPercent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "description": "Packet loss percentage calculated over all probe cycles."
+          },
+          "sent": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total probe packets transmitted to this hop."
+          },
+          "received": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Total ICMP response packets received from this hop."
+          },
+          "rttLast": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Round-trip time in milliseconds of most recent probe."
+          },
+          "rttAvg": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Average round-trip time in milliseconds across all probes."
+          },
+          "rttBest": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Lowest recorded round-trip time in milliseconds."
+          },
+          "rttWorst": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Highest recorded round-trip time in milliseconds."
+          },
+          "rttStDev": {
+            "type": ["number", "null"],
+            "minimum": 0,
+            "description": "Standard deviation of round-trip times in milliseconds."
+          },
+          "probes": {
+            "type": "array",
+            "description": "Detailed log of individual probe packets sent to this hop.",
+            "items": {
+              "type": "object",
+              "required": ["sequence", "status"],
+              "properties": {
+                "sequence": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Probe sequence number within this TTL bucket."
+                },
+                "rtt": {
+                  "type": ["number", "null"],
+                  "minimum": 0,
+                  "description": "Round-trip time in milliseconds if probe succeeded."
+                },
+                "status": {
+                  "type": "string",
+                  "enum": ["SUCCESS", "TIMEOUT", "UNREACHABLE"],
+                  "description": "Individual probe delivery status."
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,211 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://iptracer.app/schemas/v1/ip_trace_schema.json",
+  "title": "IpTraceResult",
+  "description": "Schema definition for public egress IP discovery, geolocation, and threat intelligence records in the IPTracer Standalone application.",
+  "type": "object",
+  "required": [
+    "query",
+    "ip",
+    "ipVersion",
+    "isBogon",
+    "isAnycast",
+    "location",
+    "network",
+    "threat",
+    "source",
+    "provider",
+    "responseTimeMs",
+    "timestamp"
+  ],
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Original query input (IP address, hostname, or 'self')."
+    },
+    "ip": {
+      "type": "string",
+      "description": "Resolved canonical IPv4 or IPv6 address string."
+    },
+    "ipVersion": {
+      "type": "string",
+      "enum": ["IPv4", "IPv6"],
+      "description": "Internet Protocol version."
+    },
+    "isBogon": {
+      "type": "boolean",
+      "description": "True if the IP falls within private, loopback, link-local, or reserved ranges (RFC 1918, RFC 3927, RFC 6598, etc.)."
+    },
+    "isAnycast": {
+      "type": "boolean",
+      "description": "True if the IP is identified as multi-POP Anycast routing (e.g. Cloudflare 1.1.1.1, Google 8.8.8.8)."
+    },
+    "hostname": {
+      "type": ["string", "null"],
+      "description": "Reverse DNS (PTR) hostname if resolved."
+    },
+    "location": {
+      "type": "object",
+      "description": "Geographical location details resolved from offline MMDB or cloud providers.",
+      "required": [
+        "country",
+        "countryCode",
+        "region",
+        "city",
+        "latitude",
+        "longitude",
+        "timezone"
+      ],
+      "properties": {
+        "continent": {
+          "type": ["string", "null"],
+          "description": "Continent name."
+        },
+        "continentCode": {
+          "type": ["string", "null"],
+          "description": "Two-letter continent code (e.g. 'NA', 'EU', 'AS')."
+        },
+        "country": {
+          "type": "string",
+          "description": "Full country name."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "ISO 3166-1 alpha-2 two-letter country code."
+        },
+        "region": {
+          "type": "string",
+          "description": "State, province, or administrative region name."
+        },
+        "regionCode": {
+          "type": ["string", "null"],
+          "description": "ISO 3166-2 region code if available."
+        },
+        "city": {
+          "type": "string",
+          "description": "City or municipality name."
+        },
+        "postalCode": {
+          "type": ["string", "null"],
+          "description": "Postal or ZIP code."
+        },
+        "latitude": {
+          "type": "number",
+          "minimum": -90.0,
+          "maximum": 90.0,
+          "description": "WGS 84 latitude coordinate."
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180.0,
+          "maximum": 180.0,
+          "description": "WGS 84 longitude coordinate."
+        },
+        "timezone": {
+          "type": "string",
+          "description": "IANA timezone identifier (e.g. 'America/New_York', 'UTC')."
+        },
+        "accuracyRadiusKm": {
+          "type": ["number", "null"],
+          "minimum": 0,
+          "description": "Estimated geolocation accuracy radius in kilometers."
+        }
+      },
+      "additionalProperties": false
+    },
+    "network": {
+      "type": "object",
+      "description": "BGP Autonomous System and network allocation metadata.",
+      "required": ["asn", "asnOrg", "isp"],
+      "properties": {
+        "asn": {
+          "type": ["integer", "null"],
+          "description": "Autonomous System Number (ASN) as integer (e.g. 13335)."
+        },
+        "asnOrg": {
+          "type": "string",
+          "description": "Autonomous System Organization name."
+        },
+        "isp": {
+          "type": "string",
+          "description": "Internet Service Provider or carrier name."
+        },
+        "cidr": {
+          "type": ["string", "null"],
+          "description": "Allocated CIDR prefix enclosing the target IP."
+        },
+        "bgpPrefix": {
+          "type": ["string", "null"],
+          "description": "BGP route announcement prefix."
+        }
+      },
+      "additionalProperties": false
+    },
+    "threat": {
+      "type": "object",
+      "description": "Threat intelligence and security reputation scoring.",
+      "required": [
+        "abuseConfidenceScore",
+        "totalReports",
+        "isTorExit",
+        "isProxy",
+        "isDatacenter",
+        "threatLevel"
+      ],
+      "properties": {
+        "abuseConfidenceScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Composite abuse score from 0 (clean) to 100 (critical threat)."
+        },
+        "totalReports": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total malicious activity reports across threat feeds."
+        },
+        "isTorExit": {
+          "type": "boolean",
+          "description": "True if IP is listed in Tor Project bulk exit node directory."
+        },
+        "isProxy": {
+          "type": "boolean",
+          "description": "True if IP is an identified commercial proxy or VPN gateway."
+        },
+        "isDatacenter": {
+          "type": "boolean",
+          "description": "True if IP belongs to cloud hosting/datacenter infrastructure."
+        },
+        "threatLevel": {
+          "type": "string",
+          "enum": ["CLEAN", "LOW", "MEDIUM", "HIGH", "CRITICAL"],
+          "description": "Normalized threat category classification."
+        },
+        "lastReportedAt": {
+          "type": ["string", "null"],
+          "description": "ISO 8601 timestamp of most recent abuse report."
+        }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "string",
+      "enum": ["OFFLINE_MAXMIND", "ONLINE_FAILOVER", "CACHE", "LOCAL_SENTINEL"],
+      "description": "Resolution mechanism used to generate this record."
+    },
+    "provider": {
+      "type": "string",
+      "description": "Name of the primary data provider (e.g. 'MaxMind GeoLite2', 'ipapi.co', 'ipinfo.io')."
+    },
+    "responseTimeMs": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Duration taken to resolve record in milliseconds."
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Unix epoch timestamp in milliseconds when record was captured."
+    }
+  },
+  "additionalProperties": false
+}

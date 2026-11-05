@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://iptracer.app/schemas/v1/subnet_calculator_schema.json",
+  "title": "SubnetCalculationResult",
+  "description": "Schema definition for IPv4/IPv6 CIDR bitwise subnetting, addressing boundaries, and VLSM allocation planning.",
+  "type": "object",
+  "required": [
+    "inputIp",
+    "prefixLength",
+    "ipVersion",
+    "networkAddress",
+    "netmask",
+    "wildcardMask",
+    "netmaskBinary",
+    "usableRange",
+    "totalHosts",
+    "usableHosts",
+    "isPrivate"
+  ],
+  "properties": {
+    "inputIp": {
+      "type": "string",
+      "description": "Input IP address string."
+    },
+    "prefixLength": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 128,
+      "description": "CIDR prefix length (0-32 for IPv4, 0-128 for IPv6)."
+    },
+    "ipVersion": {
+      "type": "string",
+      "enum": ["IPv4", "IPv6"],
+      "description": "IP version."
+    },
+    "networkAddress": {
+      "type": "string",
+      "description": "Calculated network boundary address."
+    },
+    "broadcastAddress": {
+      "type": ["string", "null"],
+      "description": "Calculated broadcast address (null for IPv6 or /31 point-to-point)."
+    },
+    "netmask": {
+      "type": "string",
+      "description": "Dotted-decimal (IPv4) or hexadecimal (IPv6) subnet mask."
+    },
+    "wildcardMask": {
+      "type": "string",
+      "description": "Inverted wildcard mask (e.g. '0.0.0.255')."
+    },
+    "netmaskBinary": {
+      "type": "string",
+      "description": "32-bit or 128-bit binary representation of subnet mask with octet separators."
+    },
+    "usableRange": {
+      "type": "object",
+      "description": "First and last assignable host addresses in this subnet.",
+      "required": ["firstUsable", "lastUsable"],
+      "properties": {
+        "firstUsable": {
+          "type": "string",
+          "description": "First assignable host IP address."
+        },
+        "lastUsable": {
+          "type": "string",
+          "description": "Last assignable host IP address."
+        }
+      },
+      "additionalProperties": false
+    },
+    "totalHosts": {
+      "type": "string",
+      "description": "Total theoretical IP address count as string (supports 128-bit IPv6 numbers)."
+    },
+    "usableHosts": {
+      "type": "string",
+      "description": "Total usable assignable host capacity as string."
+    },
+    "ipClass": {
+      "type": ["string", "null"],
+      "description": "Legacy IPv4 address class (A, B, C, D, E) or null for IPv6."
+    },
+    "isPrivate": {
+      "type": "boolean",
+      "description": "True if prefix falls within private RFC 1918 / RFC 4193 ULA space."
+    },
+    "isLinkLocal": {
+      "type": "boolean",
+      "description": "True if prefix is link-local (RFC 3927 / RFC 4291 fe80::/10)."
+    },
+    "isMulticast": {
+      "type": "boolean",
+      "description": "True if prefix is multicast (224.0.0.0/4 or ff00::/8)."
+    },
+    "vlsmSubnets": {
+      "type": "array",
+      "description": "Optional array of partitioned subnets when calculating a VLSM allocation plan.",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "neededHosts",
+          "allocatedHosts",
+          "prefix",
+          "subnetAddress",
+          "usableRange",
+          "broadcast"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Department or VLAN name label."
+          },
+          "neededHosts": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Requested host capacity."
+          },
+          "allocatedHosts": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Actual allocated host capacity based on power-of-two prefix."
+          },
+          "prefix": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 128,
+            "description": "Subnet mask prefix assigned."
+          },
+          "subnetAddress": {
+            "type": "string",
+            "description": "Subnet base network address."
+          },
+          "usableRange": {
+            "type": "string",
+            "description": "Formatted usable host range (e.g. '10.0.0.1 - 10.0.0.62')."
+          },
+          "broadcast": {
+            "type": "string",
+            "description": "Subnet broadcast address."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

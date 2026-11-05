@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://iptracer.app/schemas/v1/whois_rdap_schema.json",
+  "title": "RDAPLookupResult",
+  "description": "Schema definition for domain, IP address, and ASN registry inspection via RDAP (RFC 7480-7484) and legacy port 43 WHOIS.",
+  "type": "object",
+  "required": [
+    "query",
+    "objectType",
+    "handle",
+    "source",
+    "status",
+    "events",
+    "entities",
+    "nameservers"
+  ],
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Original query input (domain, IP, or ASN)."
+    },
+    "objectType": {
+      "type": "string",
+      "enum": ["DOMAIN", "IPV4", "IPV6", "AUTONOMOUS_SYSTEM"],
+      "description": "Type of registry entity queried."
+    },
+    "handle": {
+      "type": "string",
+      "description": "Registry primary identifier handle (e.g. 'NET-198-51-100-0-1', '2138514_DOMAIN_COM-VRSN')."
+    },
+    "name": {
+      "type": ["string", "null"],
+      "description": "Object name or network identifier."
+    },
+    "cidr": {
+      "type": ["string", "null"],
+      "description": "CIDR prefix block allocation for IP network objects."
+    },
+    "parentHandle": {
+      "type": ["string", "null"],
+      "description": "Parent allocation handle in registry hierarchy."
+    },
+    "whoisServer": {
+      "type": ["string", "null"],
+      "description": "Authoritative port 43 WHOIS server."
+    },
+    "rdapUrl": {
+      "type": ["string", "null"],
+      "description": "Direct RDAP REST endpoint URL queried."
+    },
+    "source": {
+      "type": "string",
+      "enum": ["RDAP", "WHOIS_PORT_43"],
+      "description": "Protocol channel used to obtain this record."
+    },
+    "status": {
+      "type": "array",
+      "description": "Array of registry status codes (e.g. 'active', 'clientTransferProhibited').",
+      "items": { "type": "string" }
+    },
+    "events": {
+      "type": "object",
+      "description": "Key lifecycle event timestamps in ISO 8601 string format.",
+      "properties": {
+        "registration": {
+          "type": ["string", "null"],
+          "description": "Initial registration timestamp."
+        },
+        "expiration": {
+          "type": ["string", "null"],
+          "description": "Registry record expiration timestamp."
+        },
+        "lastChanged": {
+          "type": ["string", "null"],
+          "description": "Last administrative update timestamp."
+        },
+        "lastUpdateOfRdapDb": {
+          "type": ["string", "null"],
+          "description": "Timestamp when RDAP database was refreshed."
+        }
+      },
+      "additionalProperties": false
+    },
+    "entities": {
+      "type": "array",
+      "description": "Associated registry contacts and organizations.",
+      "items": {
+        "type": "object",
+        "required": ["roles"],
+        "properties": {
+          "handle": {
+            "type": ["string", "null"],
+            "description": "Entity contact handle."
+          },
+          "roles": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Assigned roles (e.g. 'registrant', 'administrative', 'technical', 'abuse', 'registrar')."
+          },
+          "name": {
+            "type": ["string", "null"],
+            "description": "Contact person or entity name."
+          },
+          "organization": {
+            "type": ["string", "null"],
+            "description": "Corporate or organizational affiliation."
+          },
+          "email": {
+            "type": ["string", "null"],
+            "description": "Contact email address (or abuse reporting email)."
+          },
+          "phone": {
+            "type": ["string", "null"],
+            "description": "Contact telephone number."
+          },
+          "address": {
+            "type": ["string", "null"],
+            "description": "Physical postal address if unmasked."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "nameservers": {
+      "type": "array",
+      "description": "Delegated nameserver hostnames for domain records.",
+      "items": { "type": "string" }
+    },
+    "rawText": {
+      "type": ["string", "null"],
+      "description": "Full verbatim textual output from legacy WHOIS fallback or server remarks."
+    }
+  },
+  "additionalProperties": false
+}

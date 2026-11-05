@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IPTracer Workstation — Standalone Network Suite</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- Custom Window Title Bar -->
+    <header class="window-titlebar">
+      <div class="titlebar-left">
+        <div class="app-brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            <path d="M2 12h20"/>
+          </svg>
+          <span>IPTracer Workstation</span>
+          <span class="version-chip">v1.0.0</span>
+        </div>
+        <div class="adapter-pill" title="Active Interface Binding">
+          <span class="adapter-dot"></span>
+          <span id="activeAdapterLabel">Ethernet0 • 1 Gbps</span>
+        </div>
+      </div>
+
+      <div class="titlebar-center">
+        <div class="quick-search-box">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input type="text" id="globalSearchInput" placeholder="Quick Trace: Enter domain, IP, ASN, or subnet (e.g. 8.8.8.8, github.com)...">
+          <span class="search-shortcut">Ctrl+K</span>
+        </div>
+      </div>
+
+      <div class="titlebar-right">
+        <button class="btn-icon" id="themeToggleBtn" title="Toggle Dark / Light Theme" aria-label="Toggle theme">
+          <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+
+        <div class="window-controls">
+          <button class="window-btn" title="Minimize">_</button>
+          <button class="window-btn" title="Maximize">□</button>
+          <button class="window-btn close" title="Close">✕</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <div class="app-body">
+
+      <!-- Navigation Sidebar -->
+      <aside class="app-sidebar">
+        <div class="sidebar-top">
+          <div class="nav-section-title">Navigation</div>
+          <ul class="nav-list">
+            <li class="nav-item active" data-view="dashboard">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+              </svg>
+              <span>Dashboard</span>
+              <span class="nav-badge">Live</span>
+            </li>
+            <li class="nav-item" data-view="trace">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>IP Trace & Route</span>
+            </li>
+            <li class="nav-item" data-view="utilities">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+              <span>Utilities Suite</span>
+              <span class="nav-badge" style="background: rgba(0,240,255,0.15); color: var(--accent-cyan); border-color: rgba(0,240,255,0.3);">7 Tools</span>
+            </li>
+            <li class="nav-item" data-view="settings">
+              <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+              <span>Configuration</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="egress-mini-card" id="sidebarEgressCard" title="Click to copy Egress IP">
+            <div class="egress-mini-header">
+              <span>Public Egress IP</span>
+              <span class="pulse-beacon"></span>
+            </div>
+            <div class="egress-mini-ip">
+              <span id="sidebarIpText">104.28.19.42</span>
+              <span style="font-size: 14px;">🇺🇸</span>
+            </div>
+            <div class="egress-mini-loc">
+              <span id="sidebarLocText">San Francisco, US • 12ms</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Dynamic Viewport Area -->
+      <main class="app-viewport">
+
+        <!-- ================================================================
+             VIEW 1: DASHBOARD
+             ================================================================ -->
+        <section class="view-section active" id="view-dashboard">
+          
+          <!-- Quick Trace Strip -->
+          <div class="quick-trace-banner">
+            <div class="quick-trace-input-wrap">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="text" id="dashboardTraceInput" placeholder="Enter target IP, hostname, or ASN (e.g. 8.8.8.8, 1.1.1.1, github.com)...">
+            </div>
+            <div class="preset-pills">
+              <span class="preset-pill" data-preset="8.8.8.8">8.8.8.8 (Google)</span>
+              <span class="preset-pill" data-preset="1.1.1.1">1.1.1.1 (Cloudflare)</span>
+              <span class="preset-pill" data-preset="github.com">github.com</span>
+              <span class="preset-pill" data-preset="185.220.101.5">185.220.101.5 (Tor)</span>
+            </div>
+            <button class="btn btn-primary" id="dashboardTraceBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              Trace Target
+            </button>
+          </div>
+
+          <!-- 4-Card Telemetry Grid -->
+          <div class="telemetry-grid">
+            <div class="stat-hero-card">
+              <div class="stat-label-row">
+                <span>Egress Public IP</span>
+                <span class="stat-badge success">● Connected</span>
+              </div>
+              <div class="stat-val-main" id="dashHeroIp">104.28.19.42</div>
+              <div class="stat-detail-sub">
+                <span>🇺🇸 San Francisco, CA</span>
+                <span>•</span>
+                <span>Cloudflare (AS13335)</span>
+              </div>
+            </div>
+
+            <div class="stat-hero-card">
+              <div class="stat-label-row">
+                <span>Gateway & Local IP</span>
+                <span class="stat-badge success">1 Gbps Full-Duplex</span>
+              </div>
+              <div class="stat-val-main">192.168.1.1</div>
+              <div class="stat-detail-sub">
+                <span>Local: 192.168.1.105</span>
+                <span>•</span>
+                <span>MTU: 1500</span>
+              </div>
+            </div>
+
+            <div class="stat-hero-card">
+              <div class="stat-label-row">
+                <span>OS Socket Sentinel</span>
+                <span class="stat-badge success">42 Active</span>
+              </div>
+              <div class="stat-val-main">50 Sockets</div>
+              <div class="stat-detail-sub">
+                <span>42 Established</span>
+                <span>•</span>
+                <span>8 Listening</span>
+              </div>
+            </div>
+
+            <div class="stat-hero-card">
+              <div class="stat-label-row">
+                <span>Network Quality Score</span>
+                <span class="stat-badge success">Grade A+ (99.8%)</span>
+              </div>
+              <div class="stat-val-main">11.8 ms</div>
+              <div class="stat-detail-sub">
+                <span>Jitter: 0.9 ms</span>
+                <span>•</span>
+                <span>Loss: 0.0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Global Topology / Socket Radar Widget -->
+          <div class="glass-card topology-map-panel">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <h3 class="card-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                  Live Global Topology & Outbound Socket Sentinel
+                </h3>
+                <span class="card-subtitle">Real-time mapping of active outbound network endpoints radiating from host origin</span>
+              </div>
+              <button class="btn btn-secondary btn-sm" id="refreshMapBtn">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 4v6h-6"/>
+                  <path d="M1 20v-6h6"/>
+                  <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                </svg>
+                Sync Sockets
+              </button>
+            </div>
+            <div class="canvas-map-wrap">
+              <canvas id="worldMapCanvas"></canvas>
+              <div class="map-overlay-badge">
+                <span class="pulse-beacon"></span>
+                <span>Host Origin: 37.7749° N, 122.4194° W (San Francisco)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Trace Activity Stream -->
+          <div class="glass-card">
+            <div class="card-header-bar">
+              <h3 class="card-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                Recent Inspection Activity Stream
+              </h3>
+              <span class="card-subtitle">Saved targets and automated background watchdog audits</span>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Target Query</th>
+                    <th>Resolved IP</th>
+                    <th>Geographic Location</th>
+                    <th>Autonomous System</th>
+                    <th>Latency</th>
+                    <th>Threat Reputation</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="recentActivityTbody">
+                  <tr>
+                    <td class="mono-cell" style="font-weight: 600; color: var(--accent-cyan);">1.1.1.1</td>
+                    <td class="mono-cell">1.1.1.1</td>
+                    <td>🇺🇸 Los Angeles, US</td>
+                    <td>Cloudflare (AS13335)</td>
+                    <td class="mono-cell">8.4 ms</td>
+                    <td><span class="stat-badge success">● 0% Clean</span></td>
+                    <td><button class="btn btn-secondary btn-sm table-trace-btn" data-target="1.1.1.1">Trace</button></td>
+                  </tr>
+                  <tr>
+                    <td class="mono-cell" style="font-weight: 600; color: var(--accent-cyan);">github.com</td>
+                    <td class="mono-cell">140.82.121.4</td>
+                    <td>🇺🇸 San Francisco, US</td>
+                    <td>GitHub / Microsoft (AS36459)</td>
+                    <td class="mono-cell">14.1 ms</td>
+                    <td><span class="stat-badge success">● 0% Clean</span></td>
+                    <td><button class="btn btn-secondary btn-sm table-trace-btn" data-target="github.com">Trace</button></td>
+                  </tr>
+                  <tr>
+                    <td class="mono-cell" style="font-weight: 600; color: var(--accent-cyan);">8.8.8.8</td>
+                    <td class="mono-cell">8.8.8.8</td>
+                    <td>🇺🇸 Mountain View, US</td>
+                    <td>Google LLC (AS15169)</td>
+                    <td class="mono-cell">11.6 ms</td>
+                    <td><span class="stat-badge success">● 0% Clean</span></td>
+                    <td><button class="btn btn-secondary btn-sm table-trace-btn" data-target="8.8.8.8">Trace</button></td>
+                  </tr>
+                  <tr>
+                    <td class="mono-cell" style="font-weight: 600; color: var(--status-danger);">185.220.101.5</td>
+                    <td class="mono-cell">185.220.101.5</td>
+                    <td>🇩🇪 Frankfurt, DE</td>
+                    <td>Tor Exit Relay (AS208294)</td>
+                    <td class="mono-cell">114.2 ms</td>
+                    <td><span class="stat-badge danger">▲ 88% Tor Exit</span></td>
+                    <td><button class="btn btn-secondary btn-sm table-trace-btn" data-target="185.220.101.5">Trace</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 2: IP TRACE DETAIL & ROUTE
+             ================================================================ -->
+        <section class="view-section" id="view-trace">
+          
+          <!-- Control Strip -->
+          <div class="quick-trace-banner">
+            <div class="quick-trace-input-wrap">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+              </svg>
+              <input type="text" id="traceDetailInput" value="8.8.8.8" placeholder="Enter IP or domain to trace...">
+            </div>
+            
+            <div style="display: flex; gap: 8px;">
+              <select class="form-select" id="traceProtocolSelect">
+                <option value="ICMP">ICMP Echo</option>
+                <option value="UDP">UDP Datagram</option>
+                <option value="TCP">TCP SYN</option>
+              </select>
+              <select class="form-select" id="traceHopsSelect">
+                <option value="15">Max 15 Hops</option>
+                <option value="30" selected>Max 30 Hops</option>
+                <option value="64">Max 64 Hops</option>
+              </select>
+            </div>
+
+            <button class="btn btn-primary" id="runTraceBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              Execute Trace
+            </button>
+          </div>
+
+          <!-- Split View: Interactive Map (60%) + Threat Dossier (40%) -->
+          <div class="split-view-container">
+            
+            <!-- Left: Interactive Route Map -->
+            <div class="glass-card route-map-panel">
+              <div class="card-header-bar">
+                <div class="card-title-group">
+                  <h3 class="card-title">Geographic Route Path & Multi-Hop Projection</h3>
+                  <span class="card-subtitle" id="routeSummaryLabel">Plotting hops: Local Host → Destination</span>
+                </div>
+              </div>
+              <div class="route-canvas-box">
+                <canvas id="routeMapCanvas"></canvas>
+                <div class="map-controls-row">
+                  <button class="map-ctrl-btn" id="mapZoomInBtn" title="Zoom in">+</button>
+                  <button class="map-ctrl-btn" id="mapZoomOutBtn" title="Zoom out">−</button>
+                  <button class="map-ctrl-btn" id="mapResetBtn" title="Reset view">⟲</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Threat Intelligence & ASN Dossier -->
+            <div class="dossier-panel">
+              <div class="dossier-card">
+                <div class="card-title" style="font-size: 13px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                  Threat Intelligence & Risk Assessment
+                </div>
+                <div class="threat-radial-box">
+                  <svg class="radial-gauge-svg" viewBox="0 0 36 36">
+                    <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="3.5"/>
+                    <path id="threatGaugeArc" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="var(--status-success)" stroke-dasharray="0, 100" stroke-width="3.5" stroke-linecap="round"/>
+                  </svg>
+                  <div class="threat-score-info">
+                    <div class="threat-score-num" id="threatScoreDisplay" style="color: var(--status-success);">0% Clean</div>
+                    <div style="font-size: 11px; color: var(--text-secondary);" id="threatScoreVerdict">No malicious reports found in AbuseIPDB / VT databases.</div>
+                  </div>
+                </div>
+                <div class="threat-meta-list">
+                  <div class="meta-item">
+                    <span class="meta-key">AbuseIPDB Reports</span>
+                    <span class="meta-val" id="threatAbuseReports">0 Verified</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">VirusTotal Engines</span>
+                    <span class="meta-val" id="threatVtScore">0 / 89 Flagged</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">Tor Exit Node</span>
+                    <span class="meta-val" id="threatTorFlag">No (Clean)</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">Datacenter / Proxy</span>
+                    <span class="meta-val" id="threatProxyFlag">Datacenter Anycast</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="dossier-card">
+                <div class="card-title" style="font-size: 13px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                    <line x1="6" y1="6" x2="6.01" y2="6"/>
+                    <line x1="6" y1="18" x2="6.01" y2="18"/>
+                  </svg>
+                  Network Authority & Autonomous System
+                </div>
+                <div class="threat-meta-list">
+                  <div class="meta-item">
+                    <span class="meta-key">BGP ASN</span>
+                    <span class="meta-val" id="asnValue">AS15169</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">Organization</span>
+                    <span class="meta-val" id="orgValue">Google LLC</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">CIDR Announcement</span>
+                    <span class="meta-val" id="cidrValue">8.8.8.0/24</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">RIR Registry</span>
+                    <span class="meta-val">ARIN (Allocated: 1992-12-01)</span>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 8px; margin-top: 6px;">
+                  <button class="btn btn-secondary btn-sm" id="exportJsonBtn">Export JSON</button>
+                  <button class="btn btn-secondary btn-sm" id="exportCsvBtn">Export CSV</button>
+                  <button class="btn btn-secondary btn-sm" id="exportPcapBtn">Export PCAP</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hop-by-Hop Telemetry Table -->
+          <div class="glass-card">
+            <div class="card-header-bar">
+              <h3 class="card-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                </svg>
+                Hop-by-Hop Route Telemetry
+              </h3>
+              <span class="card-subtitle" id="hopCountBadge">5 Hops Discovered • Route Complete</span>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Hop</th>
+                    <th>Hop IP Address</th>
+                    <th>Reverse DNS (PTR)</th>
+                    <th>Carrier / ASN</th>
+                    <th>Loss %</th>
+                    <th>RTT Last</th>
+                    <th>RTT Avg</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="hopTableTbody">
+                  <!-- Populated dynamically by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 3: UTILITIES SUITE
+             ================================================================ -->
+        <section class="view-section" id="view-utilities">
+          
+          <!-- Sub-Tabs Navigation Strip -->
+          <div class="util-tabs-bar">
+            <button class="util-tab-btn active" data-tab="ping">Continuous Ping</button>
+            <button class="util-tab-btn" data-tab="portscan">Port Scanner</button>
+            <button class="util-tab-btn" data-tab="subnet">Subnet Calculator</button>
+            <button class="util-tab-btn" data-tab="dns">DNS Inspector</button>
+            <button class="util-tab-btn" data-tab="whois">WHOIS / RDAP</button>
+            <button class="util-tab-btn" data-tab="landiscovery">LAN Discovery</button>
+          </div>
+
+          <!-- Utility 1: Continuous Ping Monitor -->
+          <div class="util-content-pane active" id="tab-ping">
+            <div class="glass-card">
+              <div class="card-header-bar">
+                <div class="card-title-group">
+                  <h3 class="card-title">Real-Time Continuous Ping & Quality Monitor (RFC 3550)</h3>
+                  <span class="card-subtitle">High-precision microsecond ICMP echo probing with live statistical jitter calculation</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-primary btn-sm" id="startPingBtn">Start Ping</button>
+                  <button class="btn btn-secondary btn-sm" id="pausePingBtn">Pause</button>
+                  <button class="btn btn-danger btn-sm" id="resetPingBtn">Reset</button>
+                </div>
+              </div>
+
+              <!-- Controls Strip -->
+              <div style="display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1; min-width: 200px;">
+                  <label class="form-label">Target Host or IP</label>
+                  <div class="form-input-wrap">
+                    <input type="text" id="pingTargetInput" value="1.1.1.1">
+                  </div>
+                </div>
+                <div class="form-group" style="width: 140px;">
+                  <label class="form-label">Interval (ms)</label>
+                  <select class="form-select" id="pingIntervalSelect">
+                    <option value="250">250 ms (Fast)</option>
+                    <option value="500" selected>500 ms (Standard)</option>
+                    <option value="1000">1000 ms (1s)</option>
+                    <option value="2000">2000 ms (Slow)</option>
+                  </select>
+                </div>
+                <div class="form-group" style="width: 140px;">
+                  <label class="form-label">Payload Size</label>
+                  <select class="form-select" id="pingSizeSelect">
+                    <option value="32" selected>32 Bytes</option>
+                    <option value="64">64 Bytes</option>
+                    <option value="512">512 Bytes</option>
+                    <option value="1472">1472 Bytes (MTU)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Ping Layout: Live Sparkline Canvas + Metrics Strip -->
+              <div class="ping-monitor-panel">
+                <div class="sparkline-canvas-box">
+                  <canvas id="pingSparklineCanvas"></canvas>
+                  <div class="map-overlay-badge" style="top: 8px; left: 8px;">
+                    <span class="pulse-beacon"></span>
+                    <span id="pingCanvasLabel">Target: 1.1.1.1 • Live RTT Telemetry</span>
+                  </div>
+                </div>
+
+                <div class="ping-stat-strip">
+                  <div class="ping-stat-tile">
+                    <span class="meta-key">Min Latency</span>
+                    <span class="ping-stat-val" id="pingMinVal">8.1 ms</span>
+                  </div>
+                  <div class="ping-stat-tile">
+                    <span class="meta-key">Avg Latency</span>
+                    <span class="ping-stat-val" id="pingAvgVal">9.4 ms</span>
+                  </div>
+                  <div class="ping-stat-tile">
+                    <span class="meta-key">Max Latency</span>
+                    <span class="ping-stat-val" id="pingMaxVal">14.2 ms</span>
+                  </div>
+                  <div class="ping-stat-tile">
+                    <span class="meta-key">RFC 3550 Jitter</span>
+                    <span class="ping-stat-val" id="pingJitterVal" style="color: var(--status-success);">0.7 ms</span>
+                  </div>
+                  <div class="ping-stat-tile">
+                    <span class="meta-key">Packets Sent</span>
+                    <span class="ping-stat-val" id="pingSentVal" style="color: var(--text-primary);">42</span>
+                  </div>
+                  <div class="ping-stat-tile">
+                    <span class="meta-key">Packet Loss</span>
+                    <span class="ping-stat-val" id="pingLossVal" style="color: var(--status-success);">0.0%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Utility 2: Port Scanner -->
+          <div class="util-content-pane" id="tab-portscan">
+            <div class="glass-card">
+              <div class="card-header-bar">
+                <div class="card-title-group">
+                  <h3 class="card-title">High-Throughput Port Scanner & Service Discovery</h3>
+                  <span class="card-subtitle">Asynchronous socket sweep with service banner grabbing and TLS fingerprinting</span>
+                </div>
+                <button class="btn btn-primary btn-sm" id="startPortScanBtn">Launch Scan</button>
+              </div>
+
+              <div style="display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1; min-width: 180px;">
+                  <label class="form-label">Target Host</label>
+                  <div class="form-input-wrap">
+                    <input type="text" id="portScanTargetInput" value="1.1.1.1">
+                  </div>
+                </div>
+                <div class="form-group" style="width: 200px;">
+                  <label class="form-label">Port Preset</label>
+                  <select class="form-select" id="portPresetSelect">
+                    <option value="top20" selected>Top 20 Common Ports</option>
+                    <option value="web">Web Services (80, 443, 8080, 8443)</option>
+                    <option value="db">Databases (1433, 1521, 3306, 5432, 6379, 27017)</option>
+                    <option value="custom">Custom Range (1 - 1024)</option>
+                  </select>
+                </div>
+                <div class="form-group" style="width: 180px;">
+                  <label class="form-label">Scan Mode</label>
+                  <select class="form-select" id="portScanModeSelect">
+                    <option value="connect" selected>TCP Connect (Standard)</option>
+                    <option value="syn">SYN Stealth (Raw Socket)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Progress Bar -->
+              <div style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px;">
+                <div style="display: flex; justify-content: space-between; font-size: 11px;">
+                  <span id="portScanStatusLabel">Ready to scan target</span>
+                  <span class="mono-cell" id="portScanProgressPercent">0%</span>
+                </div>
+                <div class="scan-progress-strip">
+                  <div class="scan-progress-fill" id="portScanProgressBar"></div>
+                </div>
+              </div>
+
+              <!-- Discovered Ports Table -->
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Port</th>
+                      <th>Protocol</th>
+                      <th>State</th>
+                      <th>Service Name</th>
+                      <th>Version / Banner / TLS</th>
+                      <th>Latency</th>
+                    </tr>
+                  </thead>
+                  <tbody id="portScanTbody">
+                    <tr>
+                      <td class="mono-cell" style="font-weight: 700; color: var(--accent-cyan);">53</td>
+                      <td class="mono-cell">TCP</td>
+                      <td><span class="stat-badge success">● OPEN</span></td>
+                      <td>domain</td>
+                      <td>Cloudflare DNS Resolver</td>
+                      <td class="mono-cell">8.2 ms</td>
+                    </tr>
+                    <tr>
+                      <td class="mono-cell" style="font-weight: 700; color: var(--accent-cyan);">80</td>
+                      <td class="mono-cell">TCP</td>
+                      <td><span class="stat-badge success">● OPEN</span></td>
+                      <td>http</td>
+                      <td>cloudflare-nginx • 301 Moved Permanently</td>
+                      <td class="mono-cell">9.1 ms</td>
+                    </tr>
+                    <tr>
+                      <td class="mono-cell" style="font-weight: 700; color: var(--accent-cyan);">443</td>
+                      <td class="mono-cell">TCP</td>
+                      <td><span class="stat-badge success">● OPEN</span></td>
+                      <td>https</td>
+                      <td>TLS 1.3 • SNI: one.one.one.one (Valid to 2027)</td>
+                      <td class="mono-cell">8.9 ms</td>
+                    </tr>
+                    <tr>
+                      <td class="mono-cell" style="font-weight: 700; color: var(--accent-cyan);">853</td>
+                      <td class="mono-cell">TCP</td>
+                      <td><span class="stat-badge success">● OPEN</span></td>
+                      <td>domain-s</td>
+                      <td>DNS-over-TLS (DoT) Listener</td>
+                      <td class="mono-cell">8.6 ms</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Utility 3: Subnet Calculator -->
+          <div class="util-content-pane" id="tab-subnet">
+            <div class="glass-card">
+              <div class="card-header-bar">
+                <div class="card-title-group">
+                  <h3 class="card-title">Interactive Subnet / CIDR & VLSM Calculator</h3>
+                  <span class="card-subtitle">Real-time bitwise IPv4/IPv6 prefix math with RFC 3021 /31 and VLSM partition visualization</span>
+                </div>
+              </div>
+
+              <!-- Input Row -->
+              <div style="display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-end;">
+                <div class="form-group" style="flex: 1;">
+                  <label class="form-label">IP Address</label>
+                  <div class="form-input-wrap">
+                    <input type="text" id="subnetIpInput" value="192.168.10.45">
+                  </div>
+                </div>
+                <div class="form-group" style="width: 140px;">
+                  <label class="form-label">CIDR Prefix</label>
+                  <div class="form-input-wrap">
+                    <input type="number" id="subnetPrefixInput" value="26" min="1" max="32">
+                  </div>
+                </div>
+                <div class="form-group" style="width: 220px;">
+                  <label class="form-label">Prefix Slider (/1 to /32)</label>
+                  <input type="range" id="subnetPrefixSlider" min="1" max="32" value="26" style="width: 100%; accent-color: var(--accent-cyan); height: 26px;">
+                </div>
+              </div>
+
+              <!-- Computed Subnet Metrics Grid -->
+              <div class="subnet-grid">
+                <div class="subnet-cell">
+                  <span class="label">Network Address</span>
+                  <span class="val" id="subNetAddr">192.168.10.0</span>
+                </div>
+                <div class="subnet-cell">
+                  <span class="label">Broadcast Address</span>
+                  <span class="val" id="subBcastAddr">192.168.10.63</span>
+                </div>
+                <div class="subnet-cell">
+                  <span class="label">Subnet Mask</span>
+                  <span class="val" id="subMask">255.255.255.192</span>
+                </div>
+                <div class="subnet-cell">
+                  <span class="label">Wildcard Inverse Mask</span>
+                  <span class="val" id="subWildcard">0.0.0.63</span>
+                </div>
+                <div class="subnet-cell">
+                  <span class="label">Usable Host Range</span>
+                  <span class="val" id="subUsableRange">192.168.10.1 - 192.168.10.62</span>
+                </div>
+                <div class="subnet-cell">
+                  <span class="label">Usable Hosts / Total</span>
+                  <span class="val" id="subHostCount">62 Usable (64 Total)</span>
+                </div>
+                <div class="subnet-cell">
+                  <span class="label">Subnet Mask (Binary)</span>
+                  <span class="val" id="subMaskBinary" style="font-size: 11px;">11111111.11111111.11111111.11000000</span>
+                </div>
+                <div class="subnet-cell">
+                  <span class="label">IP Address Class & RFC 1918 Scope</span>
+                  <span class="val" id="subScopeClass">Class C • Private Intranet</span>
+                </div>
+                <div class="subnet-cell">
+                  <span class="label">Short CIDR Notation</span>
+                  <span class="val" id="subShortCidr" style="color: var(--accent-cyan);">192.168.10.0/26</span>
+                </div>
+              </div>
+
+              <!-- VLSM Allocation Partition Bar -->
+              <div style="margin-top: 20px;">
+                <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 4px;">
+                  <span style="font-weight: 600;">VLSM Parent Block Allocation Visualization (/24 parent decomposed)</span>
+                  <span class="meta-key">100% Allocated (256 Addresses)</span>
+                </div>
+                <div class="vlsm-bar-container">
+                  <div class="vlsm-segment" style="width: 25%; background: #00f0ff;" title="Engineering /26 (62 Hosts)">Subnet A (/26)</div>
+                  <div class="vlsm-segment" style="width: 25%; background: #a855f7;" title="Sales /26 (62 Hosts)">Subnet B (/26)</div>
+                  <div class="vlsm-segment" style="width: 25%; background: #3b82f6;" title="Operations /26 (62 Hosts)">Subnet C (/26)</div>
+                  <div class="vlsm-segment" style="width: 12.5%; background: #10b981;" title="Servers /27 (30 Hosts)">Subnet D (/27)</div>
+                  <div class="vlsm-segment" style="width: 12.5%; background: #f59e0b;" title="Voice/DMZ /27 (30 Hosts)">Subnet E (/27)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Utility 4: DNS Inspector -->
+          <div class="util-content-pane" id="tab-dns">
+            <div class="glass-card">
+              <div class="card-header-bar">
+                <div class="card-title-group">
+                  <h3 class="card-title">DNS Record Inspector & Global Propagation Checker</h3>
+                  <span class="card-subtitle">Encrypted DNS-over-HTTPS queries with cryptographic DNSSEC trust chain validation</span>
+                </div>
+                <button class="btn btn-primary btn-sm" id="runDnsBtn">Query DNS</button>
+              </div>
+
+              <div style="display: flex; gap: 12px; margin-bottom: 14px; flex-wrap: wrap;">
+                <div class="form-group" style="flex: 1; min-width: 200px;">
+                  <label class="form-label">Domain Name</label>
+                  <div class="form-input-wrap">
+                    <input type="text" id="dnsDomainInput" value="github.com">
+                  </div>
+                </div>
+                <div class="form-group" style="width: 140px;">
+                  <label class="form-label">Record Type</label>
+                  <select class="form-select" id="dnsTypeSelect">
+                    <option value="A" selected>A (IPv4)</option>
+                    <option value="AAAA">AAAA (IPv6)</option>
+                    <option value="MX">MX (Mail)</option>
+                    <option value="TXT">TXT / SPF / DMARC</option>
+                    <option value="NS">NS (Nameservers)</option>
+                    <option value="CNAME">CNAME (Alias)</option>
+                    <option value="SOA">SOA (Zone Authority)</option>
+                  </select>
+                </div>
+                <div class="form-group" style="width: 180px;">
+                  <label class="form-label">Resolver Mode</label>
+                  <select class="form-select">
+                    <option>Cloudflare DoH (1.1.1.1)</option>
+                    <option>Google DoH (8.8.8.8)</option>
+                    <option>System DNS (Local)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- DNSSEC Status Pill -->
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: var(--radius-md); padding: 8px 12px;">
+                <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--status-success)" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  </svg>
+                  <span style="font-weight: 600; color: var(--status-success);">DNSSEC Status: SECURE</span>
+                  <span style="color: var(--text-secondary);">— Cryptographic RRSIG validated against Root Zone Trust Anchor</span>
+                </div>
+                <span class="mono-cell" style="font-size: 11px; color: var(--text-muted);">Response: 4.8 ms</span>
+              </div>
+
+              <!-- Records Table -->
+              <div class="table-container" style="margin-bottom: 16px;">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Record Name</th>
+                      <th>Type</th>
+                      <th>TTL</th>
+                      <th>Priority</th>
+                      <th>RDATA / Target Value</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dnsRecordsTbody">
+                    <tr>
+                      <td class="mono-cell">github.com.</td>
+                      <td class="mono-cell" style="color: var(--accent-cyan); font-weight: 700;">A</td>
+                      <td class="mono-cell">60</td>
+                      <td class="mono-cell">—</td>
+                      <td class="mono-cell" style="font-weight: 600;">140.82.121.4</td>
+                    </tr>
+                    <tr>
+                      <td class="mono-cell">github.com.</td>
+                      <td class="mono-cell" style="color: var(--accent-cyan); font-weight: 700;">A</td>
+                      <td class="mono-cell">60</td>
+                      <td class="mono-cell">—</td>
+                      <td class="mono-cell" style="font-weight: 600;">140.82.121.3</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Global Propagation Grid -->
+              <div style="display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 8px;">
+                <span style="font-weight: 600;">Global Vantage Resolvers Propagation Status</span>
+                <span class="stat-badge success">100% Consistent (8/8 Resolvers Match)</span>
+              </div>
+              <div class="propagation-grid">
+                <div class="prop-node-card">
+                  <div class="prop-node-info">
+                    <span class="prop-node-city">🇺🇸 Ashburn (US-East)</span>
+                    <span class="prop-node-latency">140.82.121.4 • 9ms</span>
+                  </div>
+                  <span class="stat-badge success">MATCH</span>
+                </div>
+                <div class="prop-node-card">
+                  <div class="prop-node-info">
+                    <span class="prop-node-city">🇩🇪 Frankfurt (EU-Central)</span>
+                    <span class="prop-node-latency">140.82.121.4 • 14ms</span>
+                  </div>
+                  <span class="stat-badge success">MATCH</span>
+                </div>
+                <div class="prop-node-card">
+                  <div class="prop-node-info">
+                    <span class="prop-node-city">🇯🇵 Tokyo (AP-East)</span>
+                    <span class="prop-node-latency">140.82.121.4 • 19ms</span>
+                  </div>
+                  <span class="stat-badge success">MATCH</span>
+                </div>
+                <div class="prop-node-card">
+                  <div class="prop-node-info">
+                    <span class="prop-node-city">🇦🇺 Sydney (AP-South)</span>
+                    <span class="prop-node-latency">140.82.121.4 • 24ms</span>
+                  </div>
+                  <span class="stat-badge success">MATCH</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Utility 5: WHOIS & RDAP Registry -->
+          <div class="util-content-pane" id="tab-whois">
+            <div class="glass-card">
+              <div class="card-header-bar">
+                <div class="card-title-group">
+                  <h3 class="card-title">WHOIS & RDAP Registry Inspector (RFC 7480-7484)</h3>
+                  <span class="card-subtitle">Authoritative domain and IP allocation queries directly from IANA / RIR registries</span>
+                </div>
+                <button class="btn btn-primary btn-sm" id="queryWhoisBtn">Query RDAP</button>
+              </div>
+
+              <div style="display: flex; gap: 12px; margin-bottom: 14px;">
+                <div class="form-group" style="flex: 1;">
+                  <label class="form-label">Query Object (Domain, IP, or ASN)</label>
+                  <div class="form-input-wrap">
+                    <input type="text" id="whoisTargetInput" value="github.com">
+                  </div>
+                </div>
+                <div class="form-group" style="width: 180px;">
+                  <label class="form-label">Protocol</label>
+                  <select class="form-select">
+                    <option>RDAP JSON (Modern REST)</option>
+                    <option>Legacy WHOIS (Port 43)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- RDAP Entity Card -->
+              <div class="dossier-card" style="background: var(--bg-card);">
+                <div class="threat-meta-list" style="grid-template-columns: repeat(3, 1fr);">
+                  <div class="meta-item">
+                    <span class="meta-key">Registrar</span>
+                    <span class="meta-val">MarkMonitor Inc. (IANA ID 292)</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">Registrant Org</span>
+                    <span class="meta-val">GitHub, Inc. (San Francisco, CA)</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">Abuse Contact</span>
+                    <span class="meta-val" style="color: var(--accent-cyan);">abusecomplaints@markmonitor.com</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">Created Date</span>
+                    <span class="meta-val">2007-10-09T18:20:50Z</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">Expiration Date</span>
+                    <span class="meta-val">2028-10-09T18:20:50Z (Active)</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-key">Domain Status</span>
+                    <span class="meta-val">clientTransferProhibited</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 10px;">
+                  <span class="meta-key">Authoritative Nameservers:</span>
+                  <div style="display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap;">
+                    <span class="stat-badge success">dns1.p08.nsone.net</span>
+                    <span class="stat-badge success">dns2.p08.nsone.net</span>
+                    <span class="stat-badge success">ns-1283.awsdns-32.org</span>
+                    <span class="stat-badge success">ns-1707.awsdns-21.co.uk</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Utility 6: LAN Device Discovery -->
+          <div class="util-content-pane" id="tab-landiscovery">
+            <div class="glass-card">
+              <div class="card-header-bar">
+                <div class="card-title-group">
+                  <h3 class="card-title">Local Area Network (LAN) Device Discovery & ARP Sweep</h3>
+                  <span class="card-subtitle">Zero-configuration broadcast ARP sweep with IEEE OUI MAC vendor fingerprinting</span>
+                </div>
+                <button class="btn btn-primary btn-sm" id="startLanScanBtn">Scan Local Subnet</button>
+              </div>
+
+              <div class="table-container">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Device Type</th>
+                      <th>IP Address</th>
+                      <th>MAC Address</th>
+                      <th>OUI Hardware Vendor</th>
+                      <th>Hostname / NetBIOS</th>
+                      <th>Response RTT</th>
+                    </tr>
+                  </thead>
+                  <tbody id="lanDevicesTbody">
+                    <tr>
+                      <td>⭐️ Gateway Router</td>
+                      <td class="mono-cell" style="font-weight: 700; color: var(--accent-cyan);">192.168.1.1</td>
+                      <td class="mono-cell">00:1A:2B:3C:4D:5E</td>
+                      <td>Cisco Systems, Inc.</td>
+                      <td>router.lan</td>
+                      <td class="mono-cell">1.1 ms</td>
+                    </tr>
+                    <tr>
+                      <td>💻 Workstation (This PC)</td>
+                      <td class="mono-cell" style="font-weight: 700; color: var(--status-success);">192.168.1.105</td>
+                      <td class="mono-cell">A4:83:E7:29:10:4B</td>
+                      <td>Intel Corporate</td>
+                      <td>WORKSTATION-X1</td>
+                      <td class="mono-cell">0.1 ms</td>
+                    </tr>
+                    <tr>
+                      <td>💻 Laptop</td>
+                      <td class="mono-cell">192.168.1.112</td>
+                      <td class="mono-cell">3C:22:FB:89:12:44</td>
+                      <td>Apple, Inc.</td>
+                      <td>MacBook-Pro.local</td>
+                      <td class="mono-cell">3.4 ms</td>
+                    </tr>
+                    <tr>
+                      <td>📱 Smartphone</td>
+                      <td class="mono-cell">192.168.1.120</td>
+                      <td class="mono-cell">F0:18:98:AA:BB:CC</td>
+                      <td>Apple, Inc.</td>
+                      <td>iPhone-15.local</td>
+                      <td class="mono-cell">18.2 ms</td>
+                    </tr>
+                    <tr>
+                      <td>📺 Smart TV</td>
+                      <td class="mono-cell">192.168.1.140</td>
+                      <td class="mono-cell">50:85:69:34:21:88</td>
+                      <td>Samsung Electronics</td>
+                      <td>SAMSUNG-QLED-TV</td>
+                      <td class="mono-cell">12.6 ms</td>
+                    </tr>
+                    <tr>
+                      <td>🗄️ Network Storage</td>
+                      <td class="mono-cell">192.168.1.200</td>
+                      <td class="mono-cell">00:11:32:98:76:54</td>
+                      <td>Synology Incorporated</td>
+                      <td>DiskStation-NAS</td>
+                      <td class="mono-cell">2.1 ms</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             VIEW 4: SETTINGS & CONFIGURATION
+             ================================================================ -->
+        <section class="view-section" id="view-settings">
+          <div class="glass-card settings-section-wrap">
+            <div class="card-header-bar">
+              <div class="card-title-group">
+                <h3 class="card-title">Settings & System Configuration</h3>
+                <span class="card-subtitle">Manage threat intelligence API keys, DNS resolvers, and offline databases</span>
+              </div>
+              <button class="btn btn-primary btn-sm" id="saveSettingsBtn">Save Configuration</button>
+            </div>
+
+            <!-- API Keys Vault -->
+            <div class="dossier-card">
+              <h4 style="font-size: 13px; font-weight: 600; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                Threat Intelligence API Keys & Secrets Vault
+              </h4>
+              <p class="form-help">Keys are stored locally in the OS encrypted credential store (DPAPI / Keychain / SecretService).</p>
+
+              <div class="form-group" style="margin-top: 8px;">
+                <label class="form-label">AbuseIPDB API Key (v2)</label>
+                <div class="form-input-wrap">
+                  <input type="password" id="abuseApiKeyInput" value="a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6">
+                  <button class="btn-icon" id="toggleAbuseEye" title="Show / Hide Key">👁</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">VirusTotal API Key (v3)</label>
+                <div class="form-input-wrap">
+                  <input type="password" id="vtApiKeyInput" value="vt_secret_key_8899aabbccddeeff00112233">
+                  <button class="btn-icon" id="toggleVtEye" title="Show / Hide Key">👁</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">IPInfo.io Custom Access Token</label>
+                <div class="form-input-wrap">
+                  <input type="password" id="ipinfoApiKeyInput" placeholder="Optional token for increased query limits...">
+                </div>
+              </div>
+            </div>
+
+            <!-- Offline MaxMind Geolocation DB Manager -->
+            <div class="dossier-card">
+              <h4 style="font-size: 13px; font-weight: 600; color: var(--accent-cyan); display: flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="2" y1="12" x2="22" y2="12"/>
+                </svg>
+                Offline Geolocation Database (MaxMind GeoLite2)
+              </h4>
+              <div class="threat-meta-list" style="margin-top: 6px;">
+                <div class="meta-item">
+                  <span class="meta-key">Database Status</span>
+                  <span class="meta-val" style="color: var(--status-success);">Active (Memory-Mapped)</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-key">Database Version</span>
+                  <span class="meta-val">GeoLite2-City (v2026.11.02)</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-key">File Size</span>
+                  <span class="meta-val">42.8 MB</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-key">Lookup Latency</span>
+                  <span class="meta-val" style="color: var(--accent-cyan);">< 0.4 ms</span>
+                </div>
+              </div>
+              <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button class="btn btn-secondary btn-sm" id="checkDbUpdateBtn">Check For Database Updates</button>
+                <button class="btn btn-secondary btn-sm">Load Custom .mmdb File</button>
+              </div>
+            </div>
+
+            <!-- Application Behavior -->
+            <div class="dossier-card">
+              <h4 style="font-size: 13px; font-weight: 600; color: var(--accent-cyan);">Application Preferences & Tray Sentinel</h4>
+              
+              <label class="checkbox-row" style="margin-top: 6px;">
+                <input type="checkbox" id="trayMinimizeCheckbox" checked>
+                <span>Minimize to system tray on window close (keeps background watchdog active)</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" id="vpnAlertCheckbox" checked>
+                <span>Trigger native desktop notifications if public egress IP changes (VPN disconnect alert)</span>
+              </label>
+
+              <label class="checkbox-row">
+                <input type="checkbox" id="autoUpdateDbCheckbox" checked>
+                <span>Automatically download weekly GeoLite2 updates in background</span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- Persistent Telemetry Status Bar -->
+    <footer class="window-statusbar">
+      <div class="statusbar-item">
+        <span class="statusbar-dot"></span>
+        <span id="statusEgressText">Public IP: 104.28.19.42 • Cloudflare (AS13335)</span>
+      </div>
+      <div class="statusbar-item">
+        <span>DNS: Cloudflare DoH (4.8ms) • DNSSEC: Secure</span>
+      </div>
+      <div class="statusbar-item">
+        <span>Sockets: 42 Active • MaxMind DB: v2026.11 • Memory: 38 MB</span>
+      </div>
+    </footer>
+
+    <!-- Floating Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+  </div>
+
+  <!-- Interactive Logic Engine -->
+  <script src="app.js"></script>
+</body>
+</html>
