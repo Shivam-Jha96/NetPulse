@@ -98,9 +98,15 @@ export const api = {
     };
   },
 
-  async runTraceroute(config: { target: string; maxHops: number; timeout: { secs: number; nanos: number } }): Promise<AppResponse<{ sessionId: string }>> {
+  async runTraceroute(config: { target: string; maxHops: number; timeout: { secs: number; nanos: number }; probesPerHop?: number; isMtr?: boolean }): Promise<AppResponse<{ sessionId: string }>> {
     if (isTauri) {
-      return invoke<AppResponse<{ sessionId: string }>>('run_traceroute', { config });
+      return invoke<AppResponse<{ sessionId: string }>>('run_traceroute', {
+        config: {
+          probesPerHop: 3,
+          isMtr: false,
+          ...config,
+        },
+      });
     }
     return {
       success: true,
@@ -207,6 +213,18 @@ export const api = {
     let active = true;
     const promise = listen<HopTelemetry>('trace:hop-discovered', (event) => {
       if (active) callback(event.payload);
+    });
+    return () => {
+      active = false;
+      promise.then((unlisten) => unlisten());
+    };
+  },
+
+  onTraceCompleted(callback: () => void): () => void {
+    if (!isTauri) return () => {};
+    let active = true;
+    const promise = listen('trace:completed', () => {
+      if (active) callback();
     });
     return () => {
       active = false;

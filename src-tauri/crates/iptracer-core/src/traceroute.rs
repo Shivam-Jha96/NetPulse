@@ -13,8 +13,14 @@ pub struct TracerouteConfig {
     pub target: String,
     pub max_hops: u8,
     pub timeout: Duration,
+    #[serde(default = "default_probes_per_hop")]
     pub probes_per_hop: u8,
+    #[serde(default)]
     pub is_mtr: bool,
+}
+
+fn default_probes_per_hop() -> u8 {
+    3
 }
 
 impl Default for TracerouteConfig {

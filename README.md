@@ -7,6 +7,7 @@
 [![Engine](https://img.shields.io/badge/Stack-Tauri%20v2%20%7C%20Rust%20%7C%20React%2019-teal?style=flat-square&logo=rust)](#system-architecture)
 [![Memory](https://img.shields.io/badge/RAM%20Footprint-%3C%2035%20MB%20Idle-brightgreen?style=flat-square)](#why-netpulse)
 [![Elevation](https://img.shields.io/badge/Security-Zero--Elevation%20%2F%20No%20Root-success?style=flat-square)](#zero-elevation-security-guarantee)
+[![Wiki](https://img.shields.io/badge/Wiki-Documentation%20Hub-orange?style=flat-square&logo=gitbook)](https://github.com/Shivam-Jha96/NetPulse/wiki)
 [![Tests](https://img.shields.io/badge/Acceptance%20Tests-28%2F28%20Passing%20(100%25)-brightgreen?style=flat-square)](#testing--verification)
 [![License](https://img.shields.io/badge/License-MIT-purple?style=flat-square)](#license)
 
@@ -582,7 +583,9 @@ NetPulse/
 │   ├── implementation_roadmap.md  # 32-week phased implementation roadmap (4 milestones)
 │   ├── ui_specification.md        # Design tokens, color palette, and layout hierarchy
 │   ├── manual_testing_scripts_e2e.md # Complete manual E2E testing runsheet (MTS suites)
+│   ├── wiki/                      # Official GitHub Wiki documentation pages
 │   └── schemas/                   # 7 Draft-07 JSON schemas for diagnostic payloads
+├── scripts/                       # Automation scripts (publish-wiki.ps1, etc.)
 ├── mockups/                       # Standalone Zero-Build Interactive HTML5 Prototype
 │   ├── index.html                 # Interactive prototype entrypoint
 │   ├── styles.css                 # Cyber-glassmorphic styling

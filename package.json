@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "test:spec": "node tests/runner.js"
+    "test:spec": "node tests/runner.js",
+    "wiki:publish": "powershell -ExecutionPolicy Bypass -File scripts/publish-wiki.ps1"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.2.0",

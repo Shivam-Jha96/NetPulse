@@ -28,13 +28,19 @@ export const TraceView: React.FC = () => {
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Subscribe to live hop discovery stream
+  // Subscribe to live hop discovery stream and completion event
   useEffect(() => {
-    const unsubscribe = api.onHopDiscovered((hop) => {
+    const unsubscribeHop = api.onHopDiscovered((hop) => {
       addHop(hop);
     });
-    return () => unsubscribe();
-  }, [addHop]);
+    const unsubscribeCompleted = api.onTraceCompleted(() => {
+      stopTraceroute();
+    });
+    return () => {
+      unsubscribeHop();
+      unsubscribeCompleted();
+    };
+  }, [addHop, stopTraceroute]);
 
   // Draw 2D/3D Tactical Route Map on Canvas
   useEffect(() => {
