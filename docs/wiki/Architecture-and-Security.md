@@ -26,6 +26,9 @@ NetPulse is built on a 3-tier reactive architecture that separates UI rendering,
 │ │ DNS & RDAP Inspector │ │ Subnet Calculator    │ │ Sentinel Daemon  │ │
 │ │ (DNSSEC + DoH/DoT)   │ │ (Bitwise Rust Math)  │ │ (Uptime Watchdog)│ │
 │ └──────────────────────┘ └──────────────────────┘ └──────────────────┘ │
+│ ┌────────────────────────────────────────────────────────────────────┐ │
+│ │ Libpcap 2.4 Binary Packet Serializer & Multi-Format Report Engine  │ │
+│ └────────────────────────────────────────────────────────────────────┘ │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │ Zero-Elevation OS Socket Layer
          ┌──────────────────────────┴──────────────────────────┐
@@ -63,6 +66,24 @@ To deliver smooth 60 FPS sparkline rendering without overloading the UI thread w
 1. High-frequency packet samples are buffered in native Tokio channels.
 2. The core flushes samples to the frontend over Tauri v2 event streams at **20 Hz** (every 50 ms).
 3. The React 19 UI receives batched arrays and updates the hardware-accelerated canvas via `requestAnimationFrame`.
+
+---
+
+## 📦 Native Libpcap 2.4 Packet Generation
+
+NetPulse includes a pure Rust implementation of the standard `libpcap 2.4` binary packet format (`src-tauri/crates/iptracer-core/src/report.rs`):
+- Generates standard Ethernet frame encapsulation with IPv4/IPv6 and ICMP/TCP headers directly from socket timestamps and telemetry data.
+- Does **not** require Npcap, WinPcap, or promiscuous network adapter drivers.
+- The resulting `.pcap` files can be opened immediately in Wireshark, tcpdump, or Snort.
+
+---
+
+## 🔐 Cryptographic Update Verification
+
+NetPulse features an in-app software updater backed by asymmetric Ed25519 cryptography:
+- Update manifests are signed with an official offline release key.
+- The desktop runtime validates signatures against a built-in trust anchor public key (`e3b0c442...`) before accepting any update payload.
+- Users can switch release channels between `Stable`, `Beta`, and `Canary` from Workstation Settings.
 
 ---
 

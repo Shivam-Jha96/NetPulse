@@ -21,9 +21,12 @@
 - [LAN Discovery](Diagnostic-Modules#8-lan-device-discovery-arp-scanner)
 - [Multi-Trace & Watchdog](Diagnostic-Modules#9-enterprise-multi-trace--sentinel-watchdog)
 - [Report Export](Diagnostic-Modules#10-diagnostic-audit--report-export)
+- [Workstation Settings](Diagnostic-Modules#11-workstation-settings--in-app-update-center)
 
 ---
 
 **External Links**
 - [GitHub Repository](https://github.com/Shivam-Jha96/NetPulse)
+- [Releases & Downloads](https://github.com/Shivam-Jha96/NetPulse/releases)
 - [Issues & Bugs](https://github.com/Shivam-Jha96/NetPulse/issues)
+- [E2E Testing Report](https://github.com/Shivam-Jha96/NetPulse/blob/master/docs/E2E_MANUAL_TESTING_REPORT.md)

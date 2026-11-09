@@ -84,7 +84,19 @@ When reporting packet loss or routing problems to your ISP:
 
 1. Complete a 60-second test in **Ping Monitor** against the problematic endpoint.
 2. Complete a 30-hop trace in **IP Trace & MTR** to capture the failing router hop.
-3. Click **Export Report** (<kbd>⬇</kbd>) in the top window title bar.
-4. Select **Full Workstation Audit** and choose **Markdown** or **HTML**.
+3. Click **Export Report** (<kbd>⬇ Download</kbd>) in the top window title bar.
+4. Select **Full Workstation Audit** and choose **HTML Audit**, **RFC 4180 CSV**, or **Raw JSON**.
 5. Click **Download Report**.
-6. Attach the generated file or paste the markdown summary directly into your ISP support ticket.
+6. Attach the generated document directly to your ISP support ticket as verified forensic network evidence.
+
+---
+
+## 🛠️ Recipe 6: Generating Wireshark Packet Captures (`.pcap`) Without Npcap
+
+When security or network teams request raw PCAP captures for protocol inspection:
+
+1. Run your network diagnostics in NetPulse (Ping, Trace, Port Scan, or LAN sweep).
+2. Click **Export Report** in the title bar or Workstation Settings.
+3. Select **Libpcap (PCAP)** as the target format.
+4. NetPulse serializes the captured socket probes into a standard `libpcap 2.4` binary file using native Rust memory buffers without requiring Npcap OEM drivers or administrator privileges.
+5. Save the `.pcap` file and open it immediately in **Wireshark** or **tcpdump** for deep frame analysis.

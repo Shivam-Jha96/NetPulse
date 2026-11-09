@@ -1,6 +1,6 @@
 # Diagnostic Modules 🛠️
 
-> In-depth operational documentation for all 10 core diagnostic modules in NetPulse.
+> In-depth operational documentation for all 11 diagnostic modules and workstation tools in NetPulse.
 
 ---
 
@@ -20,7 +20,7 @@ The **Dashboard** represents your network identity and primary gateway status.
 ```
 
 ### Key Metrics & Indicators
-- **Public IP & Classification**: Displays the current public egress IPv4/IPv6 address. Automatically tagged as `PUBLIC ROUTABLE` or `BOGON / PRIVATE` (RFC 1918 / CGNAT).
+- **Public IP & Classification**: Displays the current public egress IPv4/IPv6 address. Automatically tagged as `PUBLIC ROUTABLE` or `BOGON / PRIVATE` (RFC 1918 / RFC 6598 CGNAT).
 - **ISP & ASN**: Identifies your Internet Service Provider, Autonomous System Number (ASN), and BGP prefix routing block.
 - **Physical Geolocation**: City, region, country, timezone, and coordinates with accuracy radius.
 - **Threat Intelligence**: Abuse confidence score (0–100), proxy/VPN detection, and Tor exit node verification.
@@ -59,7 +59,7 @@ Trace the exact hop-by-hop path packets take across the globe from your computer
 High-frequency, 60 FPS connection stability and line quality monitoring.
 
 ### Why Jitter Telemetry Matters
-While standard ping displays average round-trip time, **jitter** measures the statistical variation in latency between sequential packets (computed according to RFC 3550). High jitter indicates network congestion or buffering, leading to choppy voice/video calls and stuttering remote sessions.
+While standard ping displays average round-trip time, **jitter** measures the statistical variation in latency between sequential packets (computed according to RFC 3550). High jitter indicates network congestion or bufferbloat, leading to choppy voice/video calls and stuttering remote sessions.
 
 ### Configurable Parameters
 - **Target Host**: IP address or domain name.
@@ -169,10 +169,24 @@ Designed for enterprise reliability and proactive site reliability engineering (
 
 ## 10. 📑 Diagnostic Audit & Report Export
 
-Export complete diagnostic sessions or individual module findings for ISP tickets, compliance audits, or client briefs.
+Export complete diagnostic sessions or individual module findings for ISP tickets, compliance audits, or Wireshark inspection.
 
 ### Supported Formats
-- **HTML**: Standalone, interactive dashboard document.
-- **Markdown**: Clean GitHub-formatted summary for issues and pull requests.
-- **JSON**: Machine-readable payload matching NetPulse Draft-07 schemas.
-- **CSV**: Tabular metrics ready for Excel or Google Sheets.
+- **HTML Audit**: Self-contained, styled executive dashboard document with cyber-glassmorphic visuals.
+- **RFC 4180 CSV**: Spreadsheet-ready tabular metrics for Excel or Google Sheets.
+- **Libpcap 2.4 (PCAP)**: Standard binary packet capture format (`.pcap`) directly ingestible by Wireshark and tcpdump, generated using native Rust without requiring Npcap drivers.
+- **Raw JSON**: Machine-readable structured payload strictly conforming to NetPulse Draft-07 schemas.
+
+---
+
+## 11. ⚙️ Workstation Settings & In-App Update Center
+
+Configure workstation preferences, offline intelligence, and software integrity.
+
+### Capabilities & Controls
+- **Offline Geolocation Engine**: Toggle offline MaxMind GeoLite2 `.mmdb` database lookups for instant sub-millisecond geolocation without third-party API keys or internet egress.
+- **Default DNS Resolver**: Select preferred baseline DNS provider (Cloudflare `1.1.1.1`, Google `8.8.8.8`, Quad9 `9.9.9.9`, or Local System DNS).
+- **Default Ping Interval**: Configure standard probe frequencies (500 ms, 1000 ms, 2000 ms).
+- **In-App Update Channels**: Switch between `Stable`, `Beta`, and `Canary` release tracks.
+- **Cryptographic Trust Anchor Verification**: Updates are cryptographically validated against the official Ed25519 public key (`e3b0c442...`) before installation.
+- **Fast Diagnostic Export Triggers**: One-click shortcuts to export current workstation telemetry into HTML, CSV, PCAP, or JSON formats.
