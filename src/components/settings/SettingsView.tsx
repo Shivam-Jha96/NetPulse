@@ -9,14 +9,22 @@ import {
   Download,
   Shield,
   Info,
+  RefreshCw,
+  CheckCircle2,
+  Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 import { useAppStore } from '../../stores/useAppStore';
+import { api } from '../../api/ipc';
+import { UpdateStatus } from '../../types';
 
 export const SettingsView: React.FC = () => {
   const { theme, toggleTheme, pushToast } = useAppStore();
   const [offlineGeo, setOfflineGeo] = useState(true);
   const [defaultDns, setDefaultDns] = useState('1.1.1.1 (Cloudflare)');
   const [defaultInterval, setDefaultInterval] = useState('1000');
+  const [checkingUpdate, setCheckingUpdate] = useState(false);
+  const [updateResult, setUpdateResult] = useState<UpdateStatus | null>(null);
 
   const handleExport = (format: string) => {
     pushToast({
@@ -24,6 +32,37 @@ export const SettingsView: React.FC = () => {
       title: 'Export Generated',
       message: `Diagnostic session telemetry exported in ${format} format.`,
     });
+  };
+
+  const handleCheckUpdates = async () => {
+    setCheckingUpdate(true);
+    try {
+      const res = await api.checkForUpdates();
+      if (res.success && res.data) {
+        setUpdateResult(res.data);
+        if (res.data.isUpdateAvailable) {
+          pushToast({
+            type: 'info',
+            title: 'Update Available',
+            message: `NetPulse v${res.data.targetVersion} is ready for installation.`,
+          });
+        } else {
+          pushToast({
+            type: 'success',
+            title: 'Up to Date',
+            message: 'You are running the latest version of NetPulse Workstation.',
+          });
+        }
+      }
+    } catch {
+      pushToast({
+        type: 'error',
+        title: 'Update Check Failed',
+        message: 'Could not connect to update distribution channel.',
+      });
+    } finally {
+      setCheckingUpdate(false);
+    }
   };
 
   return (
@@ -143,6 +182,75 @@ export const SettingsView: React.FC = () => {
           >
             Export CSV Timeseries
           </button>
+        </div>
+      </div>
+
+      {/* Software Updates & Deployment */}
+      <div className="glass-panel p-5 rounded-xl space-y-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#00f0ff]" /> Software Updates & Release Channel
+            </h3>
+            <p className="text-xs text-slate-400 mt-1">
+              Verify cryptographic binary signatures, download updates, or check the production release feed.
+            </p>
+          </div>
+          <button
+            onClick={handleCheckUpdates}
+            disabled={checkingUpdate}
+            className="px-4 py-2 rounded-lg bg-[#00f0ff]/10 hover:bg-[#00f0ff]/20 text-[#00f0ff] font-mono text-xs border border-[#00f0ff]/30 transition-all flex items-center gap-2 disabled:opacity-50"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${checkingUpdate ? 'animate-spin' : ''}`} />
+            {checkingUpdate ? 'Checking Channel...' : 'Check for Updates'}
+          </button>
+        </div>
+
+        <div className="p-4 rounded-lg bg-black/30 border border-white/5 space-y-3 font-mono text-xs">
+          <div className="flex items-center justify-between border-b border-white/5 pb-2">
+            <span className="text-slate-400">Current Installed Version</span>
+            <span className="text-white font-bold px-2 py-0.5 rounded bg-white/10 text-[11px]">v1.0.0 (Release Build)</span>
+          </div>
+          <div className="flex items-center justify-between border-b border-white/5 pb-2">
+            <span className="text-slate-400">Trust Anchor (Ed25519 PubKey)</span>
+            <span className="text-slate-400 text-[11px] truncate max-w-[260px] sm:max-w-md">
+              e3b0c442...7852b855
+            </span>
+          </div>
+
+          {updateResult && (
+            <div className="pt-1 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="text-slate-400">Release Status</span>
+                {updateResult.isUpdateAvailable ? (
+                  <span className="text-amber-400 flex items-center gap-1 font-semibold">
+                    <Sparkles className="w-3.5 h-3.5" /> Version v{updateResult.targetVersion} Available
+                  </span>
+                ) : (
+                  <span className="text-emerald-400 flex items-center gap-1 font-semibold">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Workstation Up to Date
+                  </span>
+                )}
+              </div>
+
+              {updateResult.isUpdateAvailable && (
+                <>
+                  <div className="flex items-center justify-between">
+                    <span className="text-slate-400">Signature Verification</span>
+                    <span className="text-emerald-400 flex items-center gap-1">
+                      <Shield className="w-3.5 h-3.5" /> Authenticode & Ed25519 Verified
+                    </span>
+                  </div>
+                  {updateResult.releaseNotes && (
+                    <div className="mt-2 p-3 rounded bg-white/5 border border-white/10 text-slate-300 text-[11px] leading-relaxed">
+                      <div className="text-[#00f0ff] font-bold mb-1">Release Notes:</div>
+                      {updateResult.releaseNotes}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

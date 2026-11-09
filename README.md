@@ -93,15 +93,23 @@ npm install
 npm run tauri dev
 ```
 
-#### Packaging a Production Binary (.exe, .dmg, .deb)
+#### Packaging Commercial Production Installers (.exe, .dmg, .deb)
 ```bash
-# Compile optimized native standalone bundles
-npm run tauri build
+# Option 1: Fast NSIS Windows Installer compilation
+npm run package
+
+# Option 2: Full automated build, NSIS packaging & Authenticode signing (PowerShell)
+powershell -ExecutionPolicy Bypass -File scripts/package-and-sign.ps1
 ```
 The compiled platform-native installers will be located in:
-- **Windows**: `src-tauri/target/release/bundle/msi/` or `bundle/nsis/`
-- **macOS**: `src-tauri/target/release/bundle/dmg/` or `bundle/macos/`
-- **Linux**: `src-tauri/target/release/bundle/deb/` or `bundle/appimage/`
+- **Windows**: [`src-tauri/target/release/bundle/nsis/NetPulse_1.0.0_x64-setup.exe`](file:///d:/Dev/repos/NetPulse/src-tauri/target/release/bundle/nsis/) (~4.39 MB)
+- **macOS**: `src-tauri/target/release/bundle/dmg/` (DMG Drag-and-Drop installer)
+- **Linux**: `src-tauri/target/release/bundle/deb/` (.deb) or `bundle/appimage/` (.AppImage)
+
+#### Commercial Distribution Channels
+- **Automated Multi-Platform Releases**: [`.github/workflows/release.yml`](file:///d:/Dev/repos/NetPulse/.github/workflows/release.yml) automatically builds and publishes signed release assets on Git tag push (`v*`).
+- **Windows Package Manager (`winget`)**: Official manifests are maintained in [`.winget/manifests/`](file:///d:/Dev/repos/NetPulse/.winget/manifests/) for one-line installation (`winget install Shivam-Jha96.NetPulse`).
+- **In-App Update Verification**: Powered by cryptographic Ed25519 signatures and the in-app Update Channel under Workstation Settings.
 
 ---
 

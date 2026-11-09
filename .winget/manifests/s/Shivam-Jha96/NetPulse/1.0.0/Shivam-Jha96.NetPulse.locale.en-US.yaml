@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.defaultLocale.1.6.0.schema.json
+PackageIdentifier: Shivam-Jha96.NetPulse
+PackageVersion: 1.0.0
+PackageLocale: en-US
+Publisher: NetPulse Core Engineering Team
+PublisherUrl: https://github.com/Shivam-Jha96/NetPulse
+PublisherSupportUrl: https://github.com/Shivam-Jha96/NetPulse/issues
+Author: Shivam Jha & NetPulse Core Team
+PackageName: NetPulse
+PackageUrl: https://github.com/Shivam-Jha96/NetPulse
+License: MIT
+LicenseUrl: https://github.com/Shivam-Jha96/NetPulse/blob/main/LICENSE
+Copyright: Copyright (c) 2026 NetPulse Core Engineering Team
+ShortDescription: Zero-Elevation Network Diagnostics & Geolocation Workstation
+Description: |
+  NetPulse is a tactical, zero-elevation desktop network workstation engineered with
+  Tauri v2 (Rust + React 19). It provides 10 unified network diagnostics including
+  visual traceroute, live ping/jitter sparklines, high-speed port scanning, DNSSEC
+  inspection, and WHOIS/RDAP query tools without requiring administrator privileges
+  or third-party kernel drivers.
+Moniker: netpulse
+Tags:
+  - network
+  - ping
+  - traceroute
+  - port-scanner
+  - dns
+  - whois
+  - diagnostics
+  - sysadmin
+ReleaseNotesUrl: https://github.com/Shivam-Jha96/NetPulse/releases/tag/v1.0.0
+ManifestType: defaultLocale
+ManifestVersion: 1.6.0

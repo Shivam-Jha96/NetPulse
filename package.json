@@ -8,6 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "tauri",
+    "package": "tauri build --bundles nsis",
+    "package:all": "tauri build",
     "test:spec": "node tests/runner.js",
     "wiki:publish": "powershell -ExecutionPolicy Bypass -File scripts/publish-wiki.ps1"
   },

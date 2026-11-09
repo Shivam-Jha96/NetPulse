@@ -29,7 +29,13 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["nsis"],
+    "publisher": "NetPulse Core Engineering Team",
+    "copyright": "Copyright © 2026 NetPulse Team. All rights reserved.",
+    "category": "DeveloperTool",
+    "shortDescription": "Zero-Elevation Network Diagnostics & Geolocation Workstation",
+    "longDescription": "NetPulse is an ultra-fast, zero-elevation desktop network workstation featuring visual traceroute, continuous ping sparklines, high-speed port scanning, DNS propagation inspection, WHOIS/RDAP queries, and CIDR calculators.",
+    "licenseFile": "../LICENSE",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -40,7 +46,12 @@
     "windows": {
       "certificateThumbprint": null,
       "digestAlgorithm": "sha256",
-      "timestampUrl": "http://timestamp.digicert.com"
+      "timestampUrl": "http://timestamp.digicert.com",
+      "nsis": {
+        "installMode": "currentUser",
+        "displayLanguageSelector": false,
+        "installerIcon": "icons/icon.ico"
+      }
     },
     "macOS": {
       "signingIdentity": null,

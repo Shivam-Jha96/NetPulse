@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.6.0.schema.json
+PackageIdentifier: Shivam-Jha96.NetPulse
+PackageVersion: 1.0.0
+InstallerLocale: en-US
+Platform:
+  - Windows.Desktop
+MinimumOSVersion: 10.0.17763.0
+InstallerType: nullsoft
+Scope: user
+InstallModes:
+  - interactive
+  - silent
+UpgradeBehavior: install
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://github.com/Shivam-Jha96/NetPulse/releases/download/v1.0.0/NetPulse_1.0.0_x64-setup.exe
+    InstallerSha256: 5944D16D9B60B437D8B6719FF609F8CAAF803B79ADDF76F6DB696FACBBFDB1D5
+ManifestType: installer
+ManifestVersion: 1.6.0
