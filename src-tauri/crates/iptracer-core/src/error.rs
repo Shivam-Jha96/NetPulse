@@ -140,4 +140,5 @@ pub enum ErrorCategory {
     ThirdParty,
     Validation,
     Storage,
+    System,
 }
