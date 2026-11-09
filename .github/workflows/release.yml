@@ -67,6 +67,6 @@ jobs:
             
             ### Integrity & Verification
             All bundles include SHA256 cryptographic hashes and Ed25519 signature metadata in `latest.json`.
-          releaseDraft: true
+          releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
