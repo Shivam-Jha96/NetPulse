@@ -3,12 +3,16 @@
 > **The Ultimate Zero-Elevation Network Diagnostics, IP Telemetry & Geolocation Suite**  
 > *Engineered with Tauri v2 (Native Rust Core + React 19 / TypeScript)*
 
+[![Release](https://img.shields.io/badge/Release-v1.0.0--GA-cyan?style=flat-square&logo=github)](https://github.com/Shivam-Jha96/NetPulse/releases)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-blue?style=flat-square&logo=linux)](#system-requirements)
 [![Engine](https://img.shields.io/badge/Stack-Tauri%20v2%20%7C%20Rust%20%7C%20React%2019-teal?style=flat-square&logo=rust)](#system-architecture)
 [![Memory](https://img.shields.io/badge/RAM%20Footprint-%3C%2035%20MB%20Idle-brightgreen?style=flat-square)](#why-netpulse)
 [![Elevation](https://img.shields.io/badge/Security-Zero--Elevation%20%2F%20No%20Root-success?style=flat-square)](#zero-elevation-security-guarantee)
+[![WinGet](https://img.shields.io/badge/winget-Shivam--Jha96.NetPulse-blueviolet?style=flat-square&logo=windows)](.winget/manifests/s/Shivam-Jha96/NetPulse/1.0.0/)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?style=flat-square&logo=githubactions)](.github/workflows/release.yml)
 [![Wiki](https://img.shields.io/badge/Wiki-Documentation%20Hub-orange?style=flat-square&logo=gitbook)](https://github.com/Shivam-Jha96/NetPulse/wiki)
-[![Tests](https://img.shields.io/badge/Acceptance%20Tests-28%2F28%20Passing%20(100%25)-brightgreen?style=flat-square)](#testing--verification)
+[![Architecture Tests](https://img.shields.io/badge/Spec%20Tests-28%2F28%20Passing%20(100%25)-brightgreen?style=flat-square)](#testing--verification)
+[![E2E Verification](https://img.shields.io/badge/E2E%20Coverage-25%2F25%20PASS%20(100%25)-brightgreen?style=flat-square)](#e2e-live-desktop-verification)
 [![License](https://img.shields.io/badge/License-MIT-purple?style=flat-square)](#license)
 
 ---
@@ -37,37 +41,40 @@ Say goodbye to running eight different clunky terminal utilities, installing blo
 
 | Traditional Network Tools | The NetPulse Advantage |
 | :--- | :--- |
-| **Fragmented CLI Tools**: Juggling `ping`, `traceroute`, `nmap`, `dig`, `whois`, and `ipconfig` across separate terminal windows. | **Unified 10-in-1 Command Center**: All critical diagnostics integrated into a single responsive, keyboard-navigable desktop workstation. |
+| **Fragmented CLI Tools**: Juggling `ping`, `traceroute`, `nmap`, `dig`, `whois`, and `ipconfig` across separate terminal windows. | **Unified 11-in-1 Command Center**: All critical diagnostics integrated into a single responsive, keyboard-navigable desktop workstation. |
 | **Bloated Electron Apps**: Sluggish startup, 250–500 MB RAM idle footprint, high battery drain. | **Ultra-Lightweight Tauri v2 Engine**: Instant startup, sub-35 MB RAM idle usage, powered by compiled native Rust. |
 | **Driver & Root Barriers**: Requires administrative privileges or kernel drivers (Npcap/WinPcap) just to trace a route or scan ports. | **Zero-Elevation by Default**: Runs cleanly under standard user privileges using unprivileged native OS socket APIs (`IcmpSendEcho2`, `IPPROTO_ICMP`). |
 | **Static Text Tables**: Raw numeric outputs that are difficult to interpret quickly during outages or incidents. | **Real-Time Visual Telemetry**: Hardware-accelerated canvas route maps, animated geodesic hops, and 60 FPS sparkline jitter charts. |
 | **Cloud-Only IP Resolvers**: Fails when offline or when remote third-party IP APIs throttle your requests. | **Resilient Fallback & Offline Geo**: Multi-provider online failover (ipapi, ipinfo, ipify) plus offline MaxMind GeoLite2 `.mmdb` database support. |
-| **Scattered Logging**: Difficult to compile evidence for tickets, client audits, or ISP support requests. | **Instant Multi-Format Audit Reports**: One-click export of complete diagnostic sessions into JSON, CSV, Markdown, or HTML. |
+| **Scattered Logging**: Difficult to compile evidence for tickets, client audits, or ISP support requests. | **Instant Multi-Format Audit Reports**: One-click export of complete diagnostic sessions into self-contained HTML dashboards, RFC 4180 CSV, binary Libpcap 2.4 (PCAP for Wireshark), or Draft-07 JSON. |
+| **Manual Ad-hoc Checks**: Lack of continuous monitoring without spinning up expensive cloud telemetry stacks. | **Continuous Sentinel Watchdog & Multi-Trace**: Background 24/7 gateway health alerts, jitter monitoring, and BGP route deviation tracking. |
+| **Manual Installation & Updates**: Manual downloads and insecure unverified binary replacements. | **Commercial Distribution & Verified Updates**: One-line Windows Package Manager (`winget`) installation, signed NSIS installers, and Ed25519 cryptographic update verification. |
 
 ---
 
 ## 🛠️ Companion Utilities Suite
 
-NetPulse integrates 10 high-precision diagnostic modules into a single interface:
+NetPulse integrates 11 high-precision diagnostic modules and management utilities into a single interface:
 
 | # | Utility | Core Capability | Typical Use Case |
 | :---: | :--- | :--- | :--- |
 | **1** | **🌐 Egress Dashboard** | Public IP, ISP, ASN, reverse DNS, and Bogon/RFC 1918 range detection | Check external gateway health, VPN/proxy verification, and ISP details |
 | **2** | **🗺️ Visual Traceroute / MTR** | Hop-by-hop geodesic route animation, latency heatmaps, packet loss %, and ASN identification | Locate routing bottlenecks, peering failures, and transatlantic transit latency |
-| **3** | **📈 Live Ping & Jitter Monitor** | 60 FPS hardware-accelerated sparklines, RFC 3550 jitter calculation, min/avg/max latency | Diagnose packet drops, bufferbloat, and VoIP/gaming connection instability |
-| **4** | **🔍 High-Speed Port Scanner** | Zero-elevation TCP connect & stealth scans, presets (Top 20, Web, DB), banner grabbing | Audit open ports on servers, firewalls, routers, and IoT devices |
-| **5** | **🔎 DNS & Propagation Inspector** | Query all major records (A, AAAA, MX, NS, TXT, SOA, CAA) with DNSSEC validation across 15+ global nodes | Verify DNS migration, check record propagation, and audit DNSSEC integrity |
+| **3** | **📈 Live Ping & Jitter Monitor** | 60 FPS hardware-accelerated sparklines, RFC 3550 jitter calculation, min/avg/max latency, and DF bit | Diagnose packet drops, bufferbloat, and VoIP/gaming connection instability |
+| **4** | **🔍 High-Speed Port Scanner** | Zero-elevation TCP connect & stealth scans, presets (Top 20, Web, DB, Mail), banner grabbing | Audit open ports on servers, firewalls, routers, and IoT devices |
+| **5** | **🔎 DNS & Propagation Inspector** | Query all major records (A, AAAA, MX, NS, TXT, SOA, CAA) with DNSSEC validation across 15+ global nodes via UDP/TCP, DoH, and DoT | Verify DNS migration, check record propagation, and audit DNSSEC integrity |
 | **6** | **📋 WHOIS & RDAP Registry** | Domain/IP/ASN registration data, abuse contacts, creation dates, and CIDR allocation | Investigate domain ownership, report network abuse, and verify IP allocation |
 | **7** | **🔢 CIDR & VLSM Calculator** | Bitwise visual binary mask, usable IP ranges, wildcard masks, and hierarchical VLSM planner | Design office subnets, avoid overlapping ranges, and calculate network sizes |
 | **8** | **📡 LAN Device Discovery** | Local subnet ARP/ICMP sweeps, MAC OUI hardware vendor identification, and device tagging | Audit local office/home Wi-Fi, spot unauthorized devices, and list IoT hardware |
 | **9** | **🛡️ Multi-Target MTR & Watchdog** | Concurrent multi-endpoint route tracking, BGP route deviation detection, and 24/7 background gateway uptime alerts | Continuous uptime monitoring for critical production servers and gateways |
-| **10**| **📑 Audit & Export Engine** | Formatted diagnostic report generation with executive summaries in JSON, CSV, Markdown, and HTML | Attach network evidence to ISP support tickets, compliance audits, or client briefs |
+| **10**| **📑 Audit & Report Export Engine** | Formatted diagnostic report generation with executive summaries in HTML, RFC 4180 CSV, Libpcap 2.4 (PCAP), and Draft-07 JSON | Attach network evidence to ISP support tickets, compliance audits, or Wireshark captures |
+| **11**| **⚙️ Workstation Settings & Updates** | Offline GeoDB toggle, DNS resolver preferences, update channels (Stable/Beta/Canary), and Ed25519 signature verification | Manage telemetry preferences, update channels, and software integrity |
 
 ---
 
 ## 🚀 Quickstart & Getting Started
 
-NetPulse is designed to be accessible immediately, whether you prefer the native desktop executable, a quick local development server, or a zero-install HTML5 prototype.
+NetPulse is designed to be accessible immediately, whether you prefer the native desktop executable, package manager installation, local development server, or a zero-install HTML5 prototype.
 
 <a id="system-requirements"></a>
 ### System Requirements
@@ -79,7 +86,21 @@ NetPulse is designed to be accessible immediately, whether you prefer the native
 
 ### Method A: Native Desktop Application (Recommended)
 
-To run or build the fully compiled, high-performance desktop application:
+#### Option 1: One-Line Installation via Windows Package Manager (`winget`)
+Install NetPulse directly from PowerShell or Command Prompt using the official Windows Package Manager:
+```bash
+winget install Shivam-Jha96.NetPulse
+```
+Manifests are maintained in [`.winget/manifests/s/Shivam-Jha96/NetPulse/1.0.0/`](.winget/manifests/s/Shivam-Jha96/NetPulse/1.0.0/).
+
+#### Option 2: Pre-Built Binary Installers
+Download the latest production release from the [Releases](https://github.com/Shivam-Jha96/NetPulse/releases) page:
+- **Windows**: `NetPulse_1.0.0_x64-setup.exe` (NSIS Wizard Installer, ~4.39 MB)
+- **macOS**: `NetPulse_1.0.0_universal.dmg` (Intel & Apple Silicon Drag-and-Drop)
+- **Linux**: `NetPulse_1.0.0_amd64.deb` (.deb) or `NetPulse_1.0.0_amd64.AppImage` (.AppImage)
+
+#### Option 3: Run & Build from Source
+To run or compile the fully compiled desktop application locally:
 
 ```bash
 # 1. Clone the repository
@@ -93,22 +114,29 @@ npm install
 npm run tauri dev
 ```
 
-#### Packaging Commercial Production Installers (.exe, .dmg, .deb)
+#### Packaging Commercial Production Installers
 ```bash
-# Option 1: Fast NSIS Windows Installer compilation
+# Fast NSIS Windows Installer compilation
 npm run package
 
-# Option 2: Full automated build, NSIS packaging & Authenticode signing (PowerShell)
+# Compile all configured target bundles
+npm run package:all
+
+# Automated build, NSIS packaging & Authenticode signing (PowerShell)
 powershell -ExecutionPolicy Bypass -File scripts/package-and-sign.ps1
+
+# (Optional) Generate local development code signing certificate
+powershell -ExecutionPolicy Bypass -File scripts/create-dev-cert.ps1
 ```
-The compiled platform-native installers will be located in:
-- **Windows**: [`src-tauri/target/release/bundle/nsis/NetPulse_1.0.0_x64-setup.exe`](file:///d:/Dev/repos/NetPulse/src-tauri/target/release/bundle/nsis/) (~4.39 MB)
+
+The compiled platform-native installers are generated in:
+- **Windows**: `src-tauri/target/release/bundle/nsis/NetPulse_1.0.0_x64-setup.exe` (~4.39 MB)
 - **macOS**: `src-tauri/target/release/bundle/dmg/` (DMG Drag-and-Drop installer)
 - **Linux**: `src-tauri/target/release/bundle/deb/` (.deb) or `bundle/appimage/` (.AppImage)
 
-#### Commercial Distribution Channels
-- **Automated Multi-Platform Releases**: [`.github/workflows/release.yml`](file:///d:/Dev/repos/NetPulse/.github/workflows/release.yml) automatically builds and publishes signed release assets on Git tag push (`v*`).
-- **Windows Package Manager (`winget`)**: Official manifests are maintained in [`.winget/manifests/`](file:///d:/Dev/repos/NetPulse/.winget/manifests/) for one-line installation (`winget install Shivam-Jha96.NetPulse`).
+#### Commercial Distribution & Updates
+- **Automated Multi-Platform Releases**: [`.github/workflows/release.yml`](.github/workflows/release.yml) automatically compiles and publishes signed release assets on Git tag push (`v*`).
+- **Windows Package Manager (`winget`)**: Official manifests are maintained in [`.winget/manifests/`](.winget/manifests/s/Shivam-Jha96/NetPulse/1.0.0/) for one-line deployment.
 - **In-App Update Verification**: Powered by cryptographic Ed25519 signatures and the in-app Update Channel under Workstation Settings.
 
 ---
@@ -130,7 +158,7 @@ Open **[http://localhost:1420](http://localhost:1420)** in your browser. All dia
 
 ### Method C: Zero-Build HTML5 Interactive Prototype
 
-No Node.js? No problem! NetPulse includes a standalone, zero-dependency browser prototype:
+No Node.js or build tools? NetPulse includes a standalone, zero-dependency browser prototype:
 1. Navigate to the `mockups/` folder.
 2. Double-click `index.html` (or open it in Chrome, Edge, Safari, or Firefox).
 3. Test tab switching, theme toggles, route animations, ping sparklines, and subnet calculations without running a terminal.
@@ -273,7 +301,7 @@ Troubleshoot DNS record misconfigurations, verify newly published records, and c
 5. Click **Resolve DNS**.
 6. Inspect the results:
    - **Record Values & TTL**: Values, priorities, and remaining cache Time-To-Live.
-   - **DNSSEC Validation**: Cryptographic signature validation status (`SECURE`, `INSECURE`, or `BOGUS`).
+   - **DNSSEC Validation**: Cryptographic signature validation status (`SECURE`, `INSECURE`, or `BOGUS`) with cryptographic algorithm metadata.
    - **Global Propagation Grid**: Live status across nodes in North America, Europe, Asia, Australia, and South America with consistency percentages.
 
 ---
@@ -316,7 +344,7 @@ Broadcast Address: 192.168.1.255     Last Host:    192.168.1.254
 3. Drag the **Prefix Slider** (`/0` through `/32`) to immediately watch network metrics recalculate in real-time.
 4. **Bitwise Binary View**: See every octet color-coded into network bits and host bits.
 5. **VLSM Subnet Planner**:
-   - Need to divide your network into departmental subnets? Click **Add Subnet**.
+   - Divide your network into departmental subnets by clicking **Add Subnet**.
    - Enter department names and required host counts (e.g. "Operations: 50 hosts", "Dev: 25 hosts", "Management: 6 hosts").
    - Click **Calculate VLSM**. NetPulse automatically allocates non-overlapping subnets, assigns optimal subnet masks, and displays available leftover space.
 
@@ -355,21 +383,35 @@ Designed for enterprise reliability and proactive site reliability engineering (
 
 ---
 
-### 10. 📑 Diagnostic Audit & Report Export
+### 10. 📑 Diagnostic Audit & Report Export Engine
 
-Turn any diagnostic session into a shareable, executive-grade report for ISP support tickets, IT audits, or compliance archives.
+Turn any diagnostic session into a shareable, executive-grade report for ISP support tickets, IT audits, compliance archives, or Wireshark inspection.
 
 #### How to Use It:
 1. Click the **Export Report** button (<kbd>⬇ Download</kbd>) in the top window title bar.
 2. Select your **Report Scope**:
-   - **Full Workstation Audit**: Comprehensive compilation of all active modules (Gateway, Traceroute, Ping, Port Scan, DNS, LAN).
-   - **Active Module Only**: Export only the current tool's data.
-3. Select your desired **File Format**:
-   - **HTML**: Self-contained, styled interactive dashboard document.
-   - **Markdown**: Formatted GitHub-style summary for issue trackers and pull requests.
-   - **JSON**: Machine-readable structured payload conforming to NetPulse Draft-07 schemas.
-   - **CSV**: Spreadsheet-ready tabular metrics for Excel or Google Sheets.
+   - **Full Workstation Audit**: Comprehensive compilation of all active modules (Gateway, Traceroute, Ping, Port Scan, DNS, LAN, Watchdog).
+   - **Active Module Only**: Export only the current tool's data (Ping series, Traceroute hops, Port scan list, LAN inventory).
+3. Select your desired **Target Format**:
+   - **HTML Audit**: Self-contained, styled executive dashboard document with glassmorphic visuals.
+   - **RFC 4180 CSV**: Spreadsheet-ready tabular metrics for Excel or Google Sheets.
+   - **Libpcap 2.4 (PCAP)**: Standard binary packet capture format (`.pcap`) directly ingestible by Wireshark and tcpdump.
+   - **Raw JSON**: Machine-readable structured payload strictly conforming to NetPulse Draft-07 schemas.
 4. Click **Download Report** or **Copy to Clipboard**.
+
+---
+
+### 11. ⚙️ Workstation Settings & In-App Update Center
+
+Customize network resolution behavior, manage offline intelligence, and verify software authenticity.
+
+#### Features & Controls:
+- **Offline IP Geolocation Engine**: Toggle offline MaxMind GeoLite2 `.mmdb` database lookups for instant sub-millisecond geolocation without third-party API keys or internet egress.
+- **Default DNS Resolver**: Select your preferred baseline DNS provider (Cloudflare `1.1.1.1`, Google `8.8.8.8`, Quad9 `9.9.9.9`, or Local System DNS).
+- **Default Ping Cadence**: Configure standard probe frequencies (500 ms, 1000 ms, 2000 ms).
+- **In-App Update Channels**: Switch between `Stable`, `Beta`, and `Canary` release tracks.
+- **Cryptographic Trust Anchor Verification**: Updates are cryptographically validated against the official Ed25519 public key (`e3b0c442...`) before application.
+- **Diagnostic Export Shortcuts**: Quick triggers to export current session telemetry into HTML, CSV, PCAP, or JSON formats.
 
 ---
 
@@ -413,6 +455,15 @@ Turn any diagnostic session into a shareable, executive-grade report for ISP sup
    - IoT / Security Cameras: 30 hosts
 4. Click **Calculate VLSM**.
 5. NetPulse outputs the exact `/25`, `/26`, `/24`, and `/27` blocks, default gateways, and broadcast addresses with zero mathematical overlap.
+
+---
+
+### Scenario 5: Generating Wireshark Packet Captures Without Npcap
+1. Perform diagnostic tests (Ping, Traceroute, Port Scan, or LAN sweep).
+2. Click **Export Report** (<kbd>⬇ Download</kbd>).
+3. Select **PCAP (Libpcap 2.4)** as the target format.
+4. NetPulse serializes the diagnostic packet sequence into standard `libpcap 2.4` binary format using native Rust math without requiring kernel packet filter drivers.
+5. Open the exported `.pcap` file directly in Wireshark for deep protocol inspection.
 
 ---
 
@@ -474,6 +525,9 @@ NetPulse employs a robust three-tier architecture ensuring complete privilege se
 │ │ DNS & RDAP Inspector │ │ Subnet Calculator    │ │ Sentinel Daemon  │ │
 │ │ (DNSSEC + DoH/DoT)   │ │ (Bitwise Rust Math)  │ │ (Uptime Watchdog)│ │
 │ └──────────────────────┘ └──────────────────────┘ └──────────────────┘ │
+│ ┌────────────────────────────────────────────────────────────────────┐ │
+│ │ Libpcap 2.4 Binary Packet Serializer & Multi-Format Report Engine  │ │
+│ └────────────────────────────────────────────────────────────────────┘ │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │ Zero-Elevation OS Socket Layer
          ┌──────────────────────────┴──────────────────────────┐
@@ -501,7 +555,7 @@ When run in standard user mode, NetPulse operates with complete safety. If eleva
 
 <details>
 <summary><b>Q1: Do I need administrative or root privileges to use NetPulse?</b></summary>
-<p><b>No!</b> One of NetPulse's core engineering achievements is its zero-elevation architecture. All primary diagnostic functions—including visual traceroute, continuous ping, port scanning, DNS resolution, WHOIS queries, subnet calculations, and LAN sweeps—function with zero administrative privileges and without installing third-party kernel drivers.</p>
+<p><b>No!</b> One of NetPulse's core engineering achievements is its zero-elevation architecture. All primary diagnostic functions—including visual traceroute, continuous ping, port scanning, DNS resolution, WHOIS queries, subnet calculations, LAN sweeps, and PCAP packet export—function with zero administrative privileges and without installing third-party kernel drivers.</p>
 </details>
 
 <details>
@@ -515,14 +569,19 @@ When run in standard user mode, NetPulse operates with complete safety. If eleva
 </details>
 
 <details>
-<summary><b>Q4: Can I run NetPulse without compiling Rust or installing development tools?</b></summary>
+<summary><b>Q4: How can I install NetPulse using Windows Package Manager?</b></summary>
+<p>Simply open PowerShell or Terminal and execute: <code>winget install Shivam-Jha96.NetPulse</code>. NetPulse installs silently in user scope without requiring administrator UAC prompts.</p>
+</details>
+
+<details>
+<summary><b>Q5: Can I run NetPulse without compiling Rust or installing development tools?</b></summary>
 <p>Yes! You have two quick options:
 1. Run <code>npm run dev</code> to launch the web preview mode with simulated telemetry.
 2. Open <code>mockups/index.html</code> directly in any web browser for a zero-installation interactive prototype.</p>
 </details>
 
 <details>
-<summary><b>Q5: What is the difference between TCP Connect and SYN Stealth port scanning?</b></summary>
+<summary><b>Q6: What is the difference between TCP Connect and SYN Stealth port scanning?</b></summary>
 <p><b>TCP Connect</b> completes the standard 3-way TCP handshake (SYN &rarr; SYN-ACK &rarr; ACK) using standard operating system sockets. It works without administrator rights on all platforms. <b>SYN Stealth</b> sends raw SYN packets and tears down the connection upon receiving SYN-ACK. SYN mode requires elevated administrator/root rights.</p>
 </details>
 
@@ -531,7 +590,10 @@ When run in standard user mode, NetPulse operates with complete safety. If eleva
 <a id="testing--verification"></a>
 ## 🧪 Testing & Verification
 
-NetPulse maintains a rigorous automated testing pipeline validating architecture consistency, IPC contracts, JSON schemas, and acceptance criteria:
+NetPulse maintains a rigorous dual-track quality assurance pipeline covering architectural specifications, Draft-07 schemas, and genuine Chrome DevTools Protocol (CDP) live binary verification.
+
+### 1. Architectural & Specification Test Suite
+Validates IPC contracts, JSON schemas, documentation integrity, and requirement traceability across 4 test tiers:
 
 ```bash
 # Run the complete 4-tier automated test suite
@@ -540,7 +602,7 @@ npm run test:spec
 
 ```
 ======================================================================
-   NetPulse E2E Acceptance & Architecture Test Runner
+   NetPulse Acceptance & Architecture Test Runner
 ======================================================================
 Target Directory: docs
 Active Tiers: [1, 2, 3, 4] | Total Tests: 28
@@ -553,47 +615,92 @@ Active Tiers: [1, 2, 3, 4] | Total Tests: 28
 ✔ ALL 28 ACCEPTANCE TESTS PASSED (100% PASS RATE)
 ```
 
+<a id="e2e-live-desktop-verification"></a>
+### 2. Live Desktop E2E Verification & CDP Test Harness
+NetPulse is exhaustively validated against the production desktop release executable (`netpulse.exe`, 17.05 MB) via a live Chrome DevTools Protocol (CDP) WebSocket bridge over port 9222.
+
+Full execution report: [`docs/E2E_MANUAL_TESTING_REPORT.md`](docs/E2E_MANUAL_TESTING_REPORT.md)  
+Complete manual testing runsheet: [`docs/manual_testing_scripts_e2e.md`](docs/manual_testing_scripts_e2e.md)
+
+| Category | Evaluated Scope | Outcome | Evidence Artifacts |
+| :--- | :--- | :---: | :--- |
+| **Master Test Suites** | 14 Test Suites (Shell, Egress, Trace, Ping, PortScan, DNS, WHOIS, Subnet, LAN, Watchdog, MultiTrace, Export, Config, Stress) | **14 / 14 PASS** | 25 Verified Master Cases |
+| **Master Test Cases** | 25 Full Diagnostic Test Cases evaluated on live network sockets | **25 / 25 PASS (100%)** | Zero mocks, genuine unprivileged OS sockets |
+| **Chaos & Input Fuzzing** | 10 Chaos Vectors (RFC 1918 Bogons, Unicode/Emoji, Extreme TTLs, Network disconnects, rapid tab cycling) | **10 / 10 PASS (100%)** | Visual trapping, zero crash regressions |
+| **System Stress Scenarios** | 2 Concurrency Stress Scenarios (100 concurrent port scans, rapid IPC event streaming) | **2 / 2 PASS (100%)** | Stable memory, zero socket leaks |
+| **User Persona Journeys** | 3 End-to-End Journeys (Incident Response, Penetration Recon, Sysadmin LAN Audit) | **3 / 3 PASS (100%)** | Complete workflow validation |
+| **Visual Evidence** | High-resolution UI screenshots captured during live execution | **30 Screenshots** | Saved to [`tests/e2e/artifacts/screenshots/`](tests/e2e/artifacts/screenshots/) |
+| **Live Telemetry Dumps** | Real-world network telemetry JSON dumps from live network runs | **28 Dumps** | Saved to [`tests/e2e/artifacts/telemetry/`](tests/e2e/artifacts/telemetry/) |
+| **Diagnostic Reports** | Real multi-format export outputs (HTML, CSV, JSON, binary PCAP) | **7 Export Files** | Saved to [`tests/e2e/artifacts/reports/`](tests/e2e/artifacts/reports/) |
+| **Forensic Integrity Audit** | Verification that live desktop binary executes without mocks or stubs | **VERDICT: CLEAN** | 100% genuine OS network operations |
+
 ---
 
 ## 📁 Repository Structure
 
 ```
 NetPulse/
+├── .github/
+│   └── workflows/
+│       └── release.yml            # CI/CD multi-platform build, sign & release workflow
+├── .winget/
+│   └── manifests/                 # Official Windows Package Manager (winget) manifests
+│       └── s/Shivam-Jha96/NetPulse/1.0.0/
 ├── src/                           # React 19 / TypeScript Cyber-Glassmorphic UI
-│   ├── components/                # Diagnostic modules:
+│   ├── components/                # Diagnostic modules & workstation views:
 │   │   ├── dashboard/             # Primary egress gateway & network classification
 │   │   ├── trace/                 # Visual Traceroute / MTR with canvas mapping
+│   │   ├── enterprise/            # Multi-Target MTR & Sentinel Watchdog views
 │   │   ├── ping/                  # Continuous ping & 60 FPS sparkline telemetry
 │   │   ├── portscan/              # High-speed port scanner & banner grabbing
 │   │   ├── dns/                   # DNS inspector & 15+ global nodes propagation
 │   │   ├── whois/                 # WHOIS & RDAP registry explorer
 │   │   ├── subnet/                # CIDR & VLSM visual binary subnet calculator
 │   │   ├── lan/                   # LAN device discovery & OUI vendor resolution
-│   │   ├── enterprise/            # Multi-Target MTR & Sentinel Watchdog views
-│   │   ├── common/                # Export modal, toasts, and UI widgets
+│   │   ├── settings/              # Workstation settings, geo engine & update center
+│   │   ├── common/                # Report export modal, toasts, and UI widgets
 │   │   └── layout/                # Frameless titlebar, sidebar, and statusbar
 │   ├── stores/                    # Zustand reactive state stores
 │   ├── api/                       # Tauri v2 IPC bridge & browser mock fallback layer
+│   ├── hooks/                     # Custom React hooks (useElevation, etc.)
 │   └── styles/                    # Cyber-glassmorphism styling & Tailwind tokens
 ├── src-tauri/                     # Tauri v2 Native Rust Backend Core
 │   ├── src/                       # Desktop application entrypoint & IPC commands
 │   ├── crates/                    # Modular Rust crates:
-│   │   ├── iptracer-core/         # Core data types & error taxonomy
-│   │   ├── iptracer-net/          # Zero-elevation native OS socket engine
+│   │   ├── iptracer-core/         # Core data types, errors & Libpcap 2.4 serializer
+│   │   ├── iptracer-net/          # Zero-elevation native OS socket engine (Win32 / POSIX)
 │   │   ├── iptracer-geo/          # Multi-provider cascade & MaxMind MMDB reader
 │   │   ├── iptracer-daemon/       # Background Sentinel watchdog service
 │   │   └── iptracer-ui/           # Native OS window & system tray handlers
+│   ├── capabilities/              # Tauri v2 application security capabilities
+│   ├── tauri.conf.json            # Tauri v2 configuration & NSIS bundle settings
 │   └── Cargo.toml                 # Rust workspace configuration
-├── docs/                          # Comprehensive Engineering Specifications
+├── docs/                          # Comprehensive Engineering Specifications & Reports
 │   ├── feasibility_study.md       # Framework evaluation (Tauri v2 vs Electron vs Flutter)
 │   ├── hld.md                     # High-Level Design: Architecture, security & data flows
 │   ├── lld.md                     # Low-Level Design: Rust traits, TS stores, error schemas
 │   ├── implementation_roadmap.md  # 32-week phased implementation roadmap (4 milestones)
 │   ├── ui_specification.md        # Design tokens, color palette, and layout hierarchy
 │   ├── manual_testing_scripts_e2e.md # Complete manual E2E testing runsheet (MTS suites)
-│   ├── wiki/                      # Official GitHub Wiki documentation pages
+│   ├── E2E_MANUAL_TESTING_REPORT.md  # Full execution report of 25/25 E2E test cases
+│   ├── wiki/                      # Official GitHub Wiki documentation pages (7 articles)
 │   └── schemas/                   # 7 Draft-07 JSON schemas for diagnostic payloads
-├── scripts/                       # Automation scripts (publish-wiki.ps1, etc.)
+├── schemas/                       # Root Draft-07 JSON schemas for API & IPC contracts
+├── tests/                         # Dual-Track Automated & E2E Testing Suite
+│   ├── runner.js                  # 4-tier specification & architecture test runner
+│   ├── suites/                    # Tier 1-4 test assertion suites
+│   ├── lib/                       # Schema validators, markdown parsers & assertions
+│   └── e2e/                       # Chrome DevTools Protocol (CDP) live desktop harness
+│       ├── cdp_driver.js          # WebSocket CDP driver for WebView2
+│       ├── run_m1_suites.js       # Phase 1 desktop shell & telemetry test runner
+│       ├── run_m2_suites.js       # Phase 2 diagnostic utilities test runner
+│       ├── run_m3_suites.js       # Phase 3 advanced network tools test runner
+│       ├── challenger_stress_harness.js # High-concurrency stress harness
+│       └── artifacts/             # 30 screenshots, 28 telemetry dumps, 7 export reports
+├── scripts/                       # DevOps & Release Automation Scripts
+│   ├── package-and-sign.ps1       # Automated NSIS packaging & Authenticode signing
+│   ├── create-dev-cert.ps1        # Local code signing certificate generator
+│   └── publish-wiki.ps1           # Automated GitHub Wiki deployment script
 ├── mockups/                       # Standalone Zero-Build Interactive HTML5 Prototype
 │   ├── index.html                 # Interactive prototype entrypoint
 │   ├── styles.css                 # Cyber-glassmorphic styling
@@ -603,12 +710,34 @@ NetPulse/
 
 ---
 
+## 📚 Documentation & GitHub Wiki
+
+NetPulse includes extensive documentation for users, developers, and contributors:
+
+- **Official GitHub Wiki Hub**: [NetPulse Wiki](https://github.com/Shivam-Jha96/NetPulse/wiki)
+- **Local Wiki Articles**: All wiki articles are maintained in [`docs/wiki/`](docs/wiki/) and can be synchronized using:
+  ```bash
+  npm run wiki:publish
+  ```
+  Available wiki articles include:
+  - [`Home.md`](docs/wiki/Home.md) — Documentation overview and highlights
+  - [`Product-Overview.md`](docs/wiki/Product-Overview.md) — Product vision, benefits, and competitive analysis
+  - [`Getting-Started.md`](docs/wiki/Getting-Started.md) — Installation, system prerequisites, and development setup
+  - [`Diagnostic-Modules.md`](docs/wiki/Diagnostic-Modules.md) — In-depth guide to all diagnostic tools
+  - [`Architecture-and-Security.md`](docs/wiki/Architecture-and-Security.md) — Zero-elevation socket engine and Tauri v2 IPC
+  - [`Keyboard-Shortcuts.md`](docs/wiki/Keyboard-Shortcuts.md) — Rapid navigation cheatsheet
+  - [`Troubleshooting-Guide.md`](docs/wiki/Troubleshooting-Guide.md) — Real-world incident resolution recipes
+
+---
+
 ## 🗺️ Roadmap & Release Milestones
 
 - **Milestone 1: Core MVP (Completed)** — Tauri v2 desktop shell, Rust IP geolocation cascade with offline MMDB, interactive Canvas route map, history storage.
 - **Milestone 2: Diagnostic Utilities (Completed)** — Continuous Ping monitor with 60 FPS sparkline telemetry, unprivileged visual Traceroute/MTR, comprehensive DNS resolver with DNSSEC.
 - **Milestone 3: Advanced Network Tools (Completed)** — High-speed Port Scanner, WHOIS/RDAP client, CIDR/VLSM Subnet calculator, unprivileged LAN device scanner.
-- **Milestone 4: Enterprise Hardening & Watchdog (Completed)** — Multi-target path deviation tracing, Sentinel background watchdog daemon, multi-format audit export (HTML, CSV, JSON, Markdown), CI/CD multi-platform binary signing.
+- **Milestone 4: Enterprise Hardening & Watchdog (Completed)** — Multi-target path deviation tracing, Sentinel background watchdog daemon, multi-format audit export (HTML, CSV, PCAP, JSON), CI/CD multi-platform binary signing.
+- **Commercial Release & Distribution (v1.0.0-GA - Completed)** — Official NSIS installer packaging, Authenticode code signing automation (`package-and-sign.ps1`), GitHub Actions multi-platform CI/CD release workflow (`.github/workflows/release.yml`), Windows Package Manager (`winget`) manifest distribution (`Shivam-Jha96.NetPulse`), in-app update channel with Ed25519 signature verification, and automated GitHub Wiki publishing.
+- **Exhaustive E2E Testing Verification (Completed)** — Complete 14-suite E2E manual testing runsheet execution via Chrome DevTools Protocol against the live release binary (`netpulse.exe`), 100% pass rate across 25 master test cases, 10 chaos vectors, 2 stress scenarios, and 3 user journeys with genuine unprivileged OS socket operations.
 
 ---
 
