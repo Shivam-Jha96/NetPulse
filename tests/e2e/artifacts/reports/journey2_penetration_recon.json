@@ -1,0 +1,12 @@
+{
+  "format": "JSON",
+  "reportType": "PORT_SCAN",
+  "title": "Reconnaissance Audit — Target cloudflare.com",
+  "target": "cloudflare.com",
+  "pingSamples": null,
+  "hops": null,
+  "ports": null,
+  "lanDevices": null,
+  "alerts": null,
+  "rawPacketsHex": null
+}

@@ -1,0 +1,10 @@
+{
+  "workersLabel": "500",
+  "metrics": {
+    "OPEN PORTS": "0",
+    "CLOSED PORTS": "0",
+    "FILTERED PORTS": "40",
+    "SCAN DURATION": "1507ms",
+    "TARGET IP": "127.0.0.1"
+  }
+}

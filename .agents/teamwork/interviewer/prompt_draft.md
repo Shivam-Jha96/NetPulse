@@ -1,43 +1,33 @@
-The overall orchestrator agent should use Argon LLM and subagents should be on Gemini 3.8 Flash. Use an orchestrator to look over all phases and create sequential worker subagents to complete the phases, dividing work amongst themselves in all phases, with a code-review agent to perform its tasks once each phase milestone is completed. Complete the full NetPulse cross-platform network diagnostics and IP geolocation desktop suite across all four phases in one go and push the repository to GitHub as the final step.
+Execute the complete manual testing specification across all 14 test suites, edge cases, chaos scenarios, and stress tests against the native NetPulse desktop runtime / .exe build, and report comprehensive test results with 100% test coverage against the build.
 
 Working directory: d:\Dev\repos\NetPulse
 Integrity mode: development
 
-Reference material:
-- PROJECT.md, README.md
-- docs/implementation_roadmap.md (Phases 1-4, Sprints 1-16)
-- docs/hld.md, docs/lld.md, docs/ui_specification.md
-- mockups/, schemas/, tests/runner.js
+## Verification Resources
+- Test Specification: `docs/manual_testing_scripts_e2e.md` (14 test suites: MTS-SHELL through MTS-CHAOS, covering 25 test cases, edge cases, chaos scenarios, stress tests, and user journeys)
+- Target Executable: `src-tauri/target/release/netpulse.exe`
 
 ## Requirements
 
-### R1. Complete NetPulse Implementation Across All Phases
-Implement the NetPulse application as specified in the blueprints and implementation roadmap across all 4 phases:
-- Phase 1 (Sprints 1-4): Foundation & MVP Desktop Release (Tauri v2 + PAL sockets, Egress IP & GeoLite2, ICMP Ping/Traceroute, Subnet Calculator, Desktop packaging).
-- Phase 2 (Sprints 5-8): Enhanced Diagnostic Suite (Port Scanner, DNS Inspector, WHOIS/RDAP, 20Hz Telemetry & ECharts, Auto-updater).
-- Phase 3 (Sprints 9-12): Deep Packet Intelligence & Hardening (Privilege daemon `iptracer-helper`, SYN stealth scan, LAN ARP discovery, code signing & hardening; support non-elevated graceful fallback / simulated mode when elevation is absent).
-- Phase 4 (Sprints 13-16): Enterprise, Telemetry & Ecosystem (Sentinel watchdogs & alerts, multi-target traceroute, cloud sync stubs & reporting).
+### R1. Desktop Build Test Execution
+Execute all 14 test suites (MTS-SHELL, MTS-DASH, MTS-TRACE, MTS-MTRACE, MTS-WATCH, MTS-PING, MTS-SUBNET, MTS-PORT, MTS-DNS, MTS-WHOIS, MTS-LAN, MTS-CONFIG, MTS-REPORT, MTS-CHAOS) covering all 25 test cases defined in `docs/manual_testing_scripts_e2e.md` against the native desktop runtime or `.exe` build. The team chooses the execution mechanism.
 
-### R2. Orchestrated Worker Subagents and Milestone Code Reviews
-The orchestrator coordinates sequential worker subagents dividing the workload across all phases. After each phase milestone is completed, a dedicated code-review agent reviews and verifies the changes against specifications, architecture contracts, and quality standards before proceeding to the next phase.
+### R2. Edge Cases, Stress Tests, and Chaos Scenarios
+Execute all edge cases, stress tests, boundary conditions, and chaos scenarios specified in `docs/manual_testing_scripts_e2e.md` against the desktop build to achieve 100% test coverage against the build specification.
 
-### R3. Regular Progress Reporting
-Provide a progress report every 5 minutes detailing current sprint/phase status, completed tasks, and upcoming work.
+### R3. Comprehensive Results Reporting
+Deliver comprehensive test results detailing each test suite and case, documenting execution status (pass/fail/blocked), observable evidence, and failure diagnostics. The team chooses the deliverable format.
 
-### R4. GitHub Remote Push
-As the final step, push the completed repository and all commits to `origin master` (configuring the remote as needed).
+### R4. Environment and Privilege Boundary
+Tests must run within standard user privileges with access to the live local network and internet, without requiring elevated/administrator privileges.
 
 ## Acceptance Criteria
 
-### Automated Verification
-- [ ] Acceptance test suite `tests/runner.js` passes all tests.
-- [ ] Rust crates compile without errors (`cargo check` / `cargo test`).
-- [ ] Frontend builds without TypeScript or bundling errors (`pnpm build` / `npm run build`).
-- [ ] Dedicated code-review agent completes a review and verifies each phase milestone before the next phase begins.
-- [ ] Phase 3 raw socket operations gracefully fall back or operate in simulated mode when Administrator elevation is absent.
-- [ ] Mock or offline bundled datasets are used when external API credentials (such as MaxMind GeoLite2 or WHOIS/RDAP services) are not provided.
+### Test Execution & Coverage
+- [ ] All 14 test suites from `docs/manual_testing_scripts_e2e.md` (MTS-SHELL, MTS-DASH, MTS-TRACE, MTS-MTRACE, MTS-WATCH, MTS-PING, MTS-SUBNET, MTS-PORT, MTS-DNS, MTS-WHOIS, MTS-LAN, MTS-CONFIG, MTS-REPORT, MTS-CHAOS) have been executed against the native desktop runtime / `.exe` build.
+- [ ] All 25 test cases defined in the runsheet have evaluated outcomes (PASS, FAIL, or BLOCKED).
+- [ ] All edge cases, stress tests, and chaos scenarios specified in the runsheet are tested against the native build.
+- [ ] Each test outcome is supported by observable execution evidence, such as logs, command output, or process behavior, rather than unverified self-assessment.
 
-### Deliverables & Repository
-- [ ] Fully functional desktop application packaged with Tauri v2.
-- [ ] Progress reports delivered at 5-minute intervals throughout execution.
-- [ ] All commits pushed to GitHub on branch `master` at remote `origin`.
+### Reporting
+- [ ] A comprehensive test execution report is delivered that details the outcome of every test suite, case, and chaos/stress scenario, including diagnostics for any failures or blocked tests.

@@ -1,0 +1,53 @@
+{
+  "kpis": [
+    {
+      "label": "ACTIVE DEVICES",
+      "val": "3",
+      "sub": "Discovered on 192.168.1.0/24"
+    },
+    {
+      "label": "NETWORK GATEWAYS",
+      "val": "1",
+      "sub": "Default routing hop(s)"
+    },
+    {
+      "label": "IDENTIFIED OUI VENDORS",
+      "val": "3",
+      "sub": "IEEE database mapped"
+    },
+    {
+      "label": "SCAN SCOPE & TIME",
+      "val": "5436 ms",
+      "sub": "Subnet: 192.168.1.0/24"
+    }
+  ],
+  "devices": [
+    {
+      "hostname": "gateway.lan\nGATEWAY",
+      "isGateway": true,
+      "ip": "192.168.1.1",
+      "mac": "6C:4F:89:97:71:C0",
+      "vendor": "Cisco Systems, Inc.",
+      "category": "Network Equipment",
+      "latency": "3.54 ms"
+    },
+    {
+      "hostname": "Apple-Device.local",
+      "isGateway": false,
+      "ip": "192.168.1.4",
+      "mac": "E0:9D:13:86:B4:8A",
+      "vendor": "Apple, Inc.",
+      "category": "Workstation",
+      "latency": "0.85 ms"
+    },
+    {
+      "hostname": "Unknown Hostname",
+      "isGateway": false,
+      "ip": "192.168.1.13",
+      "mac": "D2:76:16:7D:0C:28",
+      "vendor": "Generic Network Adapter",
+      "category": "Workstation",
+      "latency": "0.85 ms"
+    }
+  ]
+}

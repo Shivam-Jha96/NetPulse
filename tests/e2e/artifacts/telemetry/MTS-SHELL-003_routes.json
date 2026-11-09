@@ -1,0 +1,107 @@
+{
+  "sidebarItems": [
+    {
+      "text": "Dashboard",
+      "hasGlow": true
+    },
+    {
+      "text": "IP Trace & MTR",
+      "hasGlow": false
+    },
+    {
+      "text": "Multi-Target MTR",
+      "hasGlow": false
+    },
+    {
+      "text": "Sentinel Watchdog",
+      "hasGlow": false
+    },
+    {
+      "text": "Ping Monitor",
+      "hasGlow": false
+    },
+    {
+      "text": "Subnet & VLSM",
+      "hasGlow": false
+    },
+    {
+      "text": "Port Scanner",
+      "hasGlow": false
+    },
+    {
+      "text": "DNS Inspector",
+      "hasGlow": false
+    },
+    {
+      "text": "WHOIS / RDAP",
+      "hasGlow": false
+    },
+    {
+      "text": "LAN Scanner",
+      "hasGlow": false
+    },
+    {
+      "text": "Settings",
+      "hasGlow": false
+    }
+  ],
+  "expectedModules": [
+    "dashboard",
+    "trace",
+    "multitrace",
+    "watchdog",
+    "ping",
+    "subnet",
+    "portscan",
+    "dns",
+    "whois",
+    "lan",
+    "settings"
+  ],
+  "routeTimings": [
+    {
+      "module": "dashboard",
+      "transitionMs": 3.23279999999977
+    },
+    {
+      "module": "trace",
+      "transitionMs": 10.654199999999946
+    },
+    {
+      "module": "multitrace",
+      "transitionMs": 17.27689999999984
+    },
+    {
+      "module": "watchdog",
+      "transitionMs": 10.08389999999963
+    },
+    {
+      "module": "ping",
+      "transitionMs": 7.720400000000154
+    },
+    {
+      "module": "subnet",
+      "transitionMs": 9.188500000000204
+    },
+    {
+      "module": "portscan",
+      "transitionMs": 42.953599999999824
+    },
+    {
+      "module": "dns",
+      "transitionMs": 11.546900000000278
+    },
+    {
+      "module": "whois",
+      "transitionMs": 7.991500000000087
+    },
+    {
+      "module": "lan",
+      "transitionMs": 11.044100000000071
+    },
+    {
+      "module": "settings",
+      "transitionMs": 9.772799999999734
+    }
+  ]
+}

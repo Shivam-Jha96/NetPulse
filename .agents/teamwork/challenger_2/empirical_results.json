@@ -1,0 +1,128 @@
+{
+  "pcap": {
+    "passed": true,
+    "sizeBytes": 114,
+    "magicHexLE": "0xa1b2c3d4",
+    "magicHexBE": "0xd4c3b2a1",
+    "isMagicValid": true,
+    "version": "2.4",
+    "thiszone": 0,
+    "sigfigs": 0,
+    "snaplen": 65535,
+    "linktype": 1,
+    "linkTypeName": "LINKTYPE_ETHERNET",
+    "packetCount": 1,
+    "packets": [
+      {
+        "offset": 24,
+        "tsSec": 1794079929,
+        "tsUsec": 0,
+        "inclLen": 74,
+        "origLen": 74,
+        "ethSrc": "00:50:56:c0:00:01",
+        "ethDst": "00:1a:2b:3c:4d:5e",
+        "etherType": "0x0800",
+        "ipSrc": "192.168.1.1",
+        "ipDst": "1.1.1.1",
+        "ipProto": 1,
+        "icmpType": 8,
+        "icmpCode": 0,
+        "icmpSeq": 1
+      }
+    ]
+  },
+  "html": {
+    "passed": true,
+    "sizeChars": 5068,
+    "hasDoctype": true,
+    "hasHtmlClose": true,
+    "hasCyberGlass": false,
+    "hasHeaderTitle": true
+  },
+  "csv": {
+    "passed": true,
+    "sizeChars": 141,
+    "lineCount": 4,
+    "header": "Sequence,TimestampMs,RttMs,Status,Ttl",
+    "dataRowCount": 3,
+    "firstRow": "1,1794079929789,12.30,SUCCESS,56"
+  },
+  "json": {
+    "passed": true,
+    "sizeChars": 243,
+    "format": "JSON",
+    "reportType": "FULL_AUDIT",
+    "title": "NetPulse Telemetry Schema Export",
+    "target": "1.1.1.1",
+    "keys": [
+      "format",
+      "reportType",
+      "title",
+      "target",
+      "pingSamples",
+      "hops",
+      "ports",
+      "lanDevices",
+      "alerts",
+      "rawPacketsHex"
+    ]
+  },
+  "journeyReports": [
+    {
+      "file": "journey1_incident_response.html",
+      "exists": true,
+      "sizeBytes": 5085
+    },
+    {
+      "file": "journey2_penetration_recon.json",
+      "exists": true,
+      "sizeBytes": 263
+    },
+    {
+      "file": "journey3_sysadmin_lan_audit.csv",
+      "exists": true,
+      "sizeBytes": 68
+    }
+  ],
+  "chaosNetworkDisconnect": {
+    "passed": true,
+    "postDisconnectState": {
+      "isStillAlive": true,
+      "buttons": [
+        "Export Report",
+        "",
+        "",
+        "",
+        "",
+        "Dashboard",
+        "IP Trace & MTR",
+        "Multi-Target MTR\nPhase 4",
+        "Sentinel Watchdog\nPhase 4",
+        "Ping Monitor",
+        "Subnet & VLSM",
+        "Port Scanner\nPhase 2",
+        "DNS Inspector\nPhase 2",
+        "WHOIS / RDAP\nPhase 2",
+        "LAN Scanner\nPhase 3",
+        "Settings",
+        "",
+        "Stop Monitor"
+      ]
+    }
+  },
+  "chaosTabSwitching": {
+    "passed": true,
+    "postTabStressState": {
+      "isAlive": true,
+      "hasCanvas": true,
+      "isPinging": true
+    },
+    "fatalErrorCount": 0,
+    "fatalErrors": []
+  },
+  "processCleanup": {
+    "passed": true,
+    "remainingCount": 0,
+    "remainingPids": []
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "tabStressState": {
+    "currentRtt": "6.0 ms",
+    "hasCanvas": true,
+    "isPingingActive": true
+  },
+  "modulesCycledCount": 22,
+  "unmountWarningsCount": 0,
+  "consoleLogsSample": [
+    {
+      "type": "warning",
+      "text": "[TAURI] Couldn't find callback id 3332514134. This might happen when the app is reloaded while Rust is running an asynchronous operation.",
+      "timestamp": 1794079957493.266
+    }
+  ]
+}

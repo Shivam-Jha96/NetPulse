@@ -1,0 +1,24 @@
+{
+  "cascadeProviders": [
+    {
+      "provider": "MaxMind GeoLite2 (mmap)",
+      "status": "PRIMARY (0.4ms)"
+    },
+    {
+      "provider": "ipapi.co",
+      "status": "STANDBY"
+    },
+    {
+      "provider": "ipinfo.io",
+      "status": "STANDBY"
+    },
+    {
+      "provider": "api.ipify.org",
+      "status": "FALLBACK"
+    }
+  ],
+  "postRoute": {
+    "hasTraceButton": true,
+    "hasGeodesicCanvas": true
+  }
+}

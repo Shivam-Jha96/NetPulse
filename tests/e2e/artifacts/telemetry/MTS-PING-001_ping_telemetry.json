@@ -1,0 +1,19 @@
+{
+  "telemetry": {
+    "metrics": {
+      "CURRENT RTT": "7.0 ms",
+      "MINIMUM RTT": "3.0 ms",
+      "AVERAGE RTT": "6.4 ms",
+      "MAXIMUM RTT": "15.0 ms",
+      "JITTER (RFC 3550)": "1.84 ms",
+      "PACKET LOSS": "0.0%"
+    },
+    "canvasValid": true,
+    "probesText": "10 probes sent • 10 received"
+  },
+  "minVal": 3,
+  "avgVal": 6.4,
+  "maxVal": 15,
+  "jitterVal": 1.84,
+  "resetTelemetry": "—"
+}

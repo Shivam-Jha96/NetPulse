@@ -1,0 +1,50 @@
+{
+  "aRecords": {
+    "dnssecBadge": "SECURE (Validated)",
+    "dnssecCard": "DNSSEC Cryptographic Verification Status\nAlgorithm: ECDSAP256SHA256\n\nCryptographic DNSSEC chain-of-trust validated via Authenticated Data (AD) flag",
+    "rows": [
+      {
+        "name": "cloudflare.com",
+        "type": "A",
+        "ttl": "171s",
+        "value": "104.16.132.229"
+      },
+      {
+        "name": "cloudflare.com",
+        "type": "A",
+        "ttl": "171s",
+        "value": "104.16.133.229"
+      }
+    ]
+  },
+  "mxRecords": [
+    {
+      "name": "cloudflare.com",
+      "type": "MX",
+      "ttl": "1436s",
+      "value": "mxa-canary.global.inbound.cf-emailsecurity.net",
+      "priority": "5"
+    },
+    {
+      "name": "cloudflare.com",
+      "type": "MX",
+      "ttl": "1436s",
+      "value": "mxb-canary.global.inbound.cf-emailsecurity.net",
+      "priority": "5"
+    },
+    {
+      "name": "cloudflare.com",
+      "type": "MX",
+      "ttl": "1436s",
+      "value": "mxa.global.inbound.cf-emailsecurity.net",
+      "priority": "10"
+    },
+    {
+      "name": "cloudflare.com",
+      "type": "MX",
+      "ttl": "1436s",
+      "value": "mxb.global.inbound.cf-emailsecurity.net",
+      "priority": "10"
+    }
+  ]
+}

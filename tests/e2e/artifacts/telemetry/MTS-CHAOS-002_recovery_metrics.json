@@ -1,0 +1,15 @@
+{
+  "preDisconnectMetrics": {
+    "currentRtt": "6.0 ms",
+    "lossRate": "0.0%"
+  },
+  "disconnectedMetrics": {
+    "nicStatus": "NIC: DOWN (Link Cutoff / Cable Unplugged)\nEgress:\n1.1.1.1\nGeoLite2: Active (Embedded)\n20 Hz IPC",
+    "isAlive": true
+  },
+  "recoveryMetrics": {
+    "currentRtt": "4.0 ms",
+    "lossRate": "0.0%"
+  },
+  "resilienceOutcome": "Zero crash, graceful socket timeout trapping, auto-recovery confirmed."
+}

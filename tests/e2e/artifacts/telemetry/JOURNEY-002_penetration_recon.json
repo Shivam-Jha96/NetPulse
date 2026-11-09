@@ -1,0 +1,15 @@
+{
+  "target": "cloudflare.com",
+  "dnsRecon": {
+    "recordsCount": 2,
+    "dnssecState": "Phase 2"
+  },
+  "whoisRecon": {
+    "handle": "CLOUDFLARE.COM"
+  },
+  "tlsRecon": {
+    "subject": "2606:4700::6810:85e5",
+    "cipher": "TLS_AES_256_GCM_SHA384"
+  },
+  "reconArtifact": "D:\\Dev\\repos\\NetPulse\\tests\\e2e\\artifacts\\reports\\journey2_penetration_recon.json"
+}

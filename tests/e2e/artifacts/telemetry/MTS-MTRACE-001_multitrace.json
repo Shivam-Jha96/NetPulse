@@ -1,0 +1,64 @@
+{
+  "chips": [
+    "1.1.1.1 Matched",
+    "8.8.8.8 Matched",
+    "208.67.222.222 Matched",
+    "github.com Matched"
+  ],
+  "kpis": [
+    {
+      "label": "CONCURRENT SESSIONS",
+      "value": "4 Destinations"
+    },
+    {
+      "label": "ROUTE PATH DEVIATIONS",
+      "value": "0 Anomalies"
+    },
+    {
+      "label": "ENGINE LATENCY BUDGET",
+      "value": "1000 ms / Hop"
+    }
+  ],
+  "rows": [
+    {
+      "ttl": "1",
+      "ip": "192.168.1.1",
+      "asn": "-"
+    },
+    {
+      "ttl": "2",
+      "ip": "10.240.12.49",
+      "asn": "-"
+    },
+    {
+      "ttl": "3",
+      "ip": "* * *",
+      "asn": "-"
+    },
+    {
+      "ttl": "4",
+      "ip": "61.246.101.45",
+      "asn": "-"
+    },
+    {
+      "ttl": "5",
+      "ip": "116.119.164.55",
+      "asn": "-"
+    },
+    {
+      "ttl": "6",
+      "ip": "182.79.223.5",
+      "asn": "-"
+    },
+    {
+      "ttl": "7",
+      "ip": "104.23.231.30",
+      "asn": "-"
+    },
+    {
+      "ttl": "8",
+      "ip": "1.1.1.1",
+      "asn": "-"
+    }
+  ]
+}

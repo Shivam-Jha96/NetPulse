@@ -1,0 +1,17 @@
+{
+  "headerInfo": {
+    "brandText": "NETPULSE\nV1.0.0-GA\nROOT\nTactical Network Diagnostics Workstation\nExport Report",
+    "hasDragRegion": true,
+    "hasActivityPulse": true,
+    "hasMinimize": true,
+    "hasMaximize": true,
+    "hasClose": true,
+    "hasExport": true,
+    "hasThemeToggle": true,
+    "hasRootBadge": true
+  },
+  "elevation": {
+    "isElevated": true,
+    "helperConnected": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "format": "JSON",
+  "reportType": "FULL_AUDIT",
+  "title": "NetPulse Telemetry Schema Export",
+  "target": "1.1.1.1",
+  "pingSamples": null,
+  "hops": null,
+  "ports": null,
+  "lanDevices": null,
+  "alerts": null,
+  "rawPacketsHex": null
+}

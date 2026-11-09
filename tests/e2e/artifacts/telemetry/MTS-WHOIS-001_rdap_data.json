@@ -1,0 +1,31 @@
+{
+  "rdapData": {
+    "objectType": "DOMAIN",
+    "handle": "CLOUDFLARE.COM",
+    "statusTags": [
+      "clientTransferProhibited",
+      "active"
+    ],
+    "lifecycleEvents": {
+      "Registered:": "2009-02-17T19:15:23Z",
+      "Expires:": "2029-02-17T19:15:23Z",
+      "Last Administrative Change:": "2024-01-18T10:45:12Z",
+      "RDAP DB Refreshed:": "2026-11-01T00:00:00Z"
+    },
+    "contacts": [
+      {
+        "org": "Cloudflare, Inc.",
+        "email": "registrar-abuse@cloudflare.com",
+        "roles": [
+          "REGISTRAR"
+        ]
+      }
+    ],
+    "nameservers": [
+      "ns3.cloudflare.com",
+      "ns4.cloudflare.com",
+      "ns5.cloudflare.com"
+    ]
+  },
+  "rawTextSnippet": "Domain Name: CLOUDFLARE.COM\r\n   Registry Domain ID: 1542998887_DOMAIN_COM-VRSN\r\n   Registrar WHOIS Server: whois.cloudflare.com\r\n   Registrar URL: http://www.cloudflare.com\r\n   Updated Date: 2024-01-09T16:45:28Z\r\n   Creation Date: 2009-02-17T22:07:54Z\r\n   Registry Expiry Date: 2033-02-17T22:07:54Z\r\n"
+}

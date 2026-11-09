@@ -1,0 +1,150 @@
+{
+  "header": "Resource Records (4)\nDirect Recursive Resolver",
+  "matchPercent": "100% Match",
+  "nodes": [
+    {
+      "name": "Cloudflare Anycast (Primary)",
+      "country": "DE",
+      "location": "Frankfurt / Dallas Anycast",
+      "values": "mxa-canary.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "6.3 ms"
+    },
+    {
+      "name": "Cloudflare Anycast (Secondary)",
+      "country": "US",
+      "location": "Global Anycast Node",
+      "values": "mxa-canary.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "6.3 ms"
+    },
+    {
+      "name": "Google Public DNS (Primary)",
+      "country": "US",
+      "location": "Mountain View, United States",
+      "values": "mxa-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "6.7 ms"
+    },
+    {
+      "name": "Google Public DNS (Secondary)",
+      "country": "US",
+      "location": "Global Anycast",
+      "values": "mxa.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "6.0 ms"
+    },
+    {
+      "name": "Quad9 Security Anycast",
+      "country": "CH",
+      "location": "Zurich, Switzerland",
+      "values": "mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "172.1 ms"
+    },
+    {
+      "name": "Quad9 Secondary",
+      "country": "CH",
+      "location": "Geneva, Switzerland",
+      "values": "mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "160.3 ms"
+    },
+    {
+      "name": "OpenDNS Cisco (Home)",
+      "country": "US",
+      "location": "San Francisco, United States",
+      "values": "mxa-canary.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "38.0 ms"
+    },
+    {
+      "name": "OpenDNS Cisco (Secondary)",
+      "country": "US",
+      "location": "Global Anycast",
+      "values": "mxa-canary.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "39.1 ms"
+    },
+    {
+      "name": "Level3 Communications",
+      "country": "US",
+      "location": "Broomfield, United States",
+      "values": "mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "188.8 ms"
+    },
+    {
+      "name": "Level3 Secondary",
+      "country": "US",
+      "location": "Broomfield, United States",
+      "values": "mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "103.2 ms"
+    },
+    {
+      "name": "AdGuard DNS (Cyprus)",
+      "country": "CY",
+      "location": "Limassol, Cyprus",
+      "values": "mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "267.8 ms"
+    },
+    {
+      "name": "DNS.WATCH (Germany)",
+      "country": "DE",
+      "location": "Munich, Germany",
+      "values": "mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "218.2 ms"
+    },
+    {
+      "name": "Yandex DNS (Russia)",
+      "country": "RU",
+      "location": "Moscow, Russia",
+      "values": "mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "225.9 ms"
+    },
+    {
+      "name": "Neustar UltraDNS",
+      "country": "US",
+      "location": "Sterling, United States",
+      "values": "mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "38.2 ms"
+    },
+    {
+      "name": "Comodo Secure DNS",
+      "country": "US",
+      "location": "Clifton, United States",
+      "values": "mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "175.9 ms"
+    },
+    {
+      "name": "AliDNS (Alibaba)",
+      "country": "CN",
+      "location": "Hangzhou, China",
+      "values": "mxa-canary.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "81.0 ms"
+    },
+    {
+      "name": "DNSPod (Tencent)",
+      "country": "CN",
+      "location": "Shenzhen, China",
+      "values": "mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net, mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "124.8 ms"
+    },
+    {
+      "name": "NTT America (Tokyo/US)",
+      "country": "JP",
+      "location": "Tokyo, Japan / USA",
+      "values": "mxb.global.inbound.cf-emailsecurity.net, mxa-canary.global.inbound.cf-emailsecurity.net, mxb-canary.global.inbound.cf-emailsecurity.net, mxa.global.inbound.cf-emailsecurity.net",
+      "status": "MATCH",
+      "latency": "116.2 ms"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "CHAOS-01": {
+    "status": "PASS",
+    "details": {
+      "hasErrorBanner": true,
+      "errorMessage": "Failed to resolve hostname '999.999.999.999': No such host is known. (os error 11001)",
+      "isAppAlive": true
+    }
+  },
+  "CHAOS-02": {
+    "status": "PASS",
+    "details": {
+      "hasErrorBanner": true,
+      "errorMessage": "Failed to resolve hostname 'http://google.com/path': No such host is known. (os error 11001)",
+      "isAppAlive": true
+    }
+  },
+  "CHAOS-03": {
+    "status": "PASS",
+    "details": {
+      "minAttr": "1",
+      "maxAttr": "64",
+      "clamped": true
+    }
+  },
+  "CHAOS-04": {
+    "status": "PASS",
+    "details": {
+      "hasError": true,
+      "errorText": "IPv4 prefix length /33 exceeds maximum 32"
+    }
+  },
+  "CHAOS-05": {
+    "status": "PASS",
+    "details": {
+      "uiMatch": true,
+      "ipcTotalHosts": "4294967296",
+      "ipcUsableHosts": "4294967294"
+    }
+  },
+  "CHAOS-06": {
+    "status": "PASS",
+    "details": {
+      "uiMatch": false,
+      "ipcTotalHosts": "1",
+      "ipcUsableHosts": "1"
+    }
+  },
+  "CHAOS-07": {
+    "status": "PASS",
+    "details": {
+      "isAppAlive": true,
+      "toastText": "PORT\tPROTOCOL\tSERVICE\tPRODUCT / VERSION\tLATENCY\tDETAILS"
+    }
+  },
+  "CHAOS-08": {
+    "status": "PASS",
+    "details": {
+      "isAppAlive": true,
+      "recordsCount": 0,
+      "hasErrorOrZero": true,
+      "details": "NETPULSE\nV1.0.0-GA\nROOT\nTactical Network Diagnostics Workstation\nExport Report\nCORE WORKSTATION\nDashboard\nIP Trace & MTR\nMulti-Target MTR\nPhase 4\nSentinel Watchdog\nPhase 4\nPing Monitor\nSubnet & VLSM\nPort Scanner\nPhase 2\nDNS Inspector\nPhase 2\nWHOIS / RDAP\nPhase 2\nLAN Scanner\nPhase 3\nSettings\nPAL Unprivileged\n\nWin32 Iphlpapi zero-elevation socket engine active.\n\nDNS Inspector & Global Propagation\nRFC 1035 / DNSSEC\n\nQuery RRsets, cryptographically verify DNSSEC chains-of-trust, and check multi-vantage propagation\n\nQuerying...\nTarget FQDN / Domain\nRecord Type\nA\nAAAA\nCNAME\nMX\nTXT\nNS\nSOA\nCAA\nPTR\nSRV\nTransport Channel\nUDP / TCP (Port 53)\nDNS-over-HTTPS (DoH)\nDNS-over-TLS (DoT)\nQUERY STATUS\nQuerying...\nRESPONSE LATENCY\n-\nDNSSEC SECURITY\nUnchecked\nGLOBAL PROPAGATION\n-\nResource Records (0)\nDirect Recursive Resolver\n\nResolving DNS records...\n\nGlobal Propagation Vantage Points (0 Nodes)\n0% Match\n\nGlobal multi-resolver propagation checks will appear here after querying.\n\nNIC: Loopback Pseudo-Interface 1\nEgress:\n1.1.1.1\nGeoLite2: Active (Embedded)\n20 Hz IPC\nPort Scan Complete\nScanned target in 1510ms. Found 2 open ports."
+    }
+  },
+  "CHAOS-09": {
+    "status": "PASS",
+    "details": {
+      "isAppAlive": true,
+      "hasContent": true
+    }
+  },
+  "CHAOS-10": {
+    "status": "PASS",
+    "details": {
+      "totalClicksAttempted": 20,
+      "debounceOrDisabledObserved": false,
+      "isAppAlive": true
+    }
+  }
+}

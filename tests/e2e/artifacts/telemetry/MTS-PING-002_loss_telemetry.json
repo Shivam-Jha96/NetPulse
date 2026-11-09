@@ -1,0 +1,11 @@
+{
+  "metrics": {
+    "CURRENT RTT": "—",
+    "MINIMUM RTT": "—",
+    "AVERAGE RTT": "—",
+    "MAXIMUM RTT": "—",
+    "JITTER (RFC 3550)": "0.00 ms",
+    "PACKET LOSS": "100.0%"
+  },
+  "probesText": "4 probes sent • 0 received"
+}

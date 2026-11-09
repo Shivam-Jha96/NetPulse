@@ -1,0 +1,43 @@
+{
+  "ip": "1.1.1.1",
+  "badges": [
+    "NETPULSE",
+    "V1.0.0-GA",
+    "ROOT",
+    "Phase 4",
+    "Phase 4",
+    "Phase 2",
+    "Phase 2",
+    "Phase 2",
+    "Phase 3",
+    "PRIMARY EGRESS GATEWAY",
+    "PUBLIC ROUTABLE",
+    "OFFLINE_MAXMIND",
+    "PROVIDER CASCADE HEALTH",
+    "4 Active",
+    "DIAGNOSTIC LAUNCHPAD"
+  ],
+  "subtitle": "Cloudflare, Inc. (AS13335) • San Jose, California, United States",
+  "metrics": [
+    {
+      "label": "COORDINATES",
+      "value": "37.3382° N, -121.8863° W",
+      "detail": "America/Los_Angeles"
+    },
+    {
+      "label": "AUTONOMOUS SYSTEM",
+      "value": "AS13335",
+      "detail": "Cloudflare"
+    },
+    {
+      "label": "REPUTATION & THREAT",
+      "value": "CLEAN (0/100)",
+      "detail": "Tor: No • Proxy: No"
+    },
+    {
+      "label": "RESOLUTION SPEED",
+      "value": "0.01 ms",
+      "detail": "Provider: MaxMind GeoLite2 (Embedded)"
+    }
+  ]
+}

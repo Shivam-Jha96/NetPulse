@@ -1,0 +1,65 @@
+{
+  "initial": {
+    "badges": [
+      "V1.0.0-GA",
+      "ROOT",
+      "Phase 4",
+      "Phase 4",
+      "Phase 2",
+      "Phase 2",
+      "Phase 2",
+      "Phase 3",
+      "IPv4",
+      "Class C",
+      "RFC 1918 Private"
+    ],
+    "cards": [
+      {
+        "label": "NETWORK ADDRESS",
+        "value": "192.168.10.0",
+        "sub": "Wire ID (Lowest)"
+      },
+      {
+        "label": "BROADCAST ADDRESS",
+        "value": "192.168.10.255",
+        "sub": "All Hosts Broadcast"
+      },
+      {
+        "label": "SUBNET MASK",
+        "value": "255.255.255.0",
+        "sub": "Wildcard: 0.0.0.255"
+      },
+      {
+        "label": "USABLE HOST RANGE",
+        "value": "192.168.10.1 – 192.168.10.254",
+        "sub": "254 Usable (256 Total)"
+      }
+    ],
+    "binaryDisplay": "11111111.11111111.11111111.00000000"
+  },
+  "updated": {
+    "cards": [
+      {
+        "label": "NETWORK ADDRESS",
+        "value": "192.168.10.0",
+        "sub": "Wire ID (Lowest)"
+      },
+      {
+        "label": "BROADCAST ADDRESS",
+        "value": "192.168.10.63",
+        "sub": "All Hosts Broadcast"
+      },
+      {
+        "label": "SUBNET MASK",
+        "value": "255.255.255.192",
+        "sub": "Wildcard: 0.0.0.63"
+      },
+      {
+        "label": "USABLE HOST RANGE",
+        "value": "192.168.10.1 – 192.168.10.62",
+        "sub": "62 Usable (64 Total)"
+      }
+    ],
+    "cidrValue": "192.168.10.0/26"
+  }
+}

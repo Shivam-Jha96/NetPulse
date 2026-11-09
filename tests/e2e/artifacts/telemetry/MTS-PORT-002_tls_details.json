@@ -1,0 +1,8 @@
+{
+  "title": "Port 443 Inspection",
+  "stateBadge": "OPEN",
+  "subject": "2606:4700::6810:85e5",
+  "issuer": "Authoritative Certificate Authority",
+  "expires": "2028-12-31T23:59:59Z",
+  "cipher": "TLS_AES_256_GCM_SHA384"
+}

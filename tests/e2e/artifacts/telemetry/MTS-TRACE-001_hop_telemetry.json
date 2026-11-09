@@ -1,0 +1,82 @@
+[
+  {
+    "ttl": "1",
+    "ip": "192.168.1.1",
+    "hostname": "Edge Router",
+    "loss": "0%",
+    "sent": "3",
+    "recv": "3",
+    "rttLast": "1.00 ms",
+    "rttAvg": "7.00 ms"
+  },
+  {
+    "ttl": "2",
+    "ip": "10.240.12.49",
+    "hostname": "Edge Router",
+    "loss": "0%",
+    "sent": "3",
+    "recv": "3",
+    "rttLast": "4.00 ms",
+    "rttAvg": "4.33 ms"
+  },
+  {
+    "ttl": "3",
+    "ip": "* * * Request timed out",
+    "hostname": "—",
+    "loss": "100%",
+    "sent": "3",
+    "recv": "0",
+    "rttLast": "—",
+    "rttAvg": "—"
+  },
+  {
+    "ttl": "4",
+    "ip": "61.246.101.45",
+    "hostname": "dsl-tn-045.101.246.61.airtelbroadband.in",
+    "loss": "0%",
+    "sent": "3",
+    "recv": "3",
+    "rttLast": "6.00 ms",
+    "rttAvg": "4.67 ms"
+  },
+  {
+    "ttl": "5",
+    "ip": "116.119.164.55",
+    "hostname": "Edge Router",
+    "loss": "0%",
+    "sent": "3",
+    "recv": "3",
+    "rttLast": "5.00 ms",
+    "rttAvg": "4.67 ms"
+  },
+  {
+    "ttl": "6",
+    "ip": "182.79.223.5",
+    "hostname": "Edge Router",
+    "loss": "0%",
+    "sent": "3",
+    "recv": "3",
+    "rttLast": "9.00 ms",
+    "rttAvg": "10.33 ms"
+  },
+  {
+    "ttl": "7",
+    "ip": "104.23.231.30",
+    "hostname": "Edge Router",
+    "loss": "0%",
+    "sent": "3",
+    "recv": "3",
+    "rttLast": "6.00 ms",
+    "rttAvg": "5.33 ms"
+  },
+  {
+    "ttl": "8",
+    "ip": "1.1.1.1",
+    "hostname": "one.one.one.one",
+    "loss": "0%",
+    "sent": "3",
+    "recv": "3",
+    "rttLast": "6.00 ms",
+    "rttAvg": "6.00 ms"
+  }
+]

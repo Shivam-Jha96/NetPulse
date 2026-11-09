@@ -1,0 +1,15 @@
+{
+  "lanAudit": {
+    "deviceCount": 1,
+    "devices": [
+      {
+        "ip": "No LAN devices discovered yet\n\nClick “Start ARP Discovery” to sweep your local subnet for connected workstations, mobile devices, IoT hardware, and network routers."
+      }
+    ]
+  },
+  "subnetPlan": {
+    "netmask": "255.255.0.0",
+    "usableHosts": "10.0.0.1 – 10.0.255.254"
+  },
+  "exportedCsv": "D:\\Dev\\repos\\NetPulse\\tests\\e2e\\artifacts\\reports\\journey3_sysadmin_lan_audit.csv"
+}

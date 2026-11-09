@@ -1,0 +1,18 @@
+{
+  "metrics": {
+    "OPEN PORTS": "1",
+    "CLOSED PORTS": "0",
+    "FILTERED PORTS": "16",
+    "SCAN DURATION": "1540ms",
+    "TARGET IP": "2600:3c01::f03c:91ff:fe18:bb2f"
+  },
+  "tableRows": [
+    {
+      "port": "80",
+      "protocol": "TCP",
+      "service": "http",
+      "product": "Apache 2.4.7",
+      "latency": "248.9 ms"
+    }
+  ]
+}

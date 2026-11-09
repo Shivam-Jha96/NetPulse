@@ -1,0 +1,54 @@
+{
+  "modalInfo": {
+    "title": "Export Diagnostic Report",
+    "formatButtons": [
+      {
+        "label": "HTML Audit",
+        "desc": "Executive UI"
+      },
+      {
+        "label": "RFC CSV",
+        "desc": "Data Tables"
+      },
+      {
+        "label": "Libpcap",
+        "desc": "Wireshark 2.4"
+      },
+      {
+        "label": "Raw JSON",
+        "desc": "Raw Schemas"
+      }
+    ],
+    "scopeButtons": [
+      "HTML Audit\nExecutive UI",
+      "RFC CSV\nData Tables",
+      "Libpcap\nWireshark 2.4",
+      "Raw JSON\nRaw Schemas",
+      "Full Diagnostic Audit",
+      "MTR Traceroute Hops",
+      "Ping Latency Series",
+      "Port Scan Inventory",
+      "LAN ARP Neighbors"
+    ],
+    "hasShieldNotice": true
+  },
+  "htmlReport": {
+    "path": "D:\\Dev\\repos\\NetPulse\\tests\\e2e\\artifacts\\reports\\MTS-REPORT-001_report.html",
+    "sizeBytes": 5068
+  },
+  "csvReport": {
+    "path": "D:\\Dev\\repos\\NetPulse\\tests\\e2e\\artifacts\\reports\\MTS-REPORT-001_report.csv",
+    "sizeBytes": 141
+  },
+  "jsonReport": {
+    "path": "D:\\Dev\\repos\\NetPulse\\tests\\e2e\\artifacts\\reports\\MTS-REPORT-001_report.json",
+    "sizeBytes": 243
+  },
+  "pcapReport": {
+    "path": "D:\\Dev\\repos\\NetPulse\\tests\\e2e\\artifacts\\reports\\MTS-REPORT-001_capture.pcap",
+    "sizeBytes": 114,
+    "magicHex": "0xd4c3b2a1",
+    "version": "2.4",
+    "dataLink": 1
+  }
+}

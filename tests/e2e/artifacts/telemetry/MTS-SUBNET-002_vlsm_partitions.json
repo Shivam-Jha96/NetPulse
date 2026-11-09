@@ -1,0 +1,45 @@
+{
+  "tableData": [
+    {
+      "name": "Engineering",
+      "needed": "100",
+      "allocated": "126",
+      "prefix": "/25",
+      "subnetAddress": "10.0.0.0",
+      "usableRange": "10.0.0.1 - 10.0.0.126",
+      "broadcast": "10.0.0.127"
+    },
+    {
+      "name": "Sales",
+      "needed": "50",
+      "allocated": "62",
+      "prefix": "/26",
+      "subnetAddress": "10.0.0.128",
+      "usableRange": "10.0.0.129 - 10.0.0.190",
+      "broadcast": "10.0.0.191"
+    },
+    {
+      "name": "Infrastructure",
+      "needed": "20",
+      "allocated": "30",
+      "prefix": "/27",
+      "subnetAddress": "10.0.0.192",
+      "usableRange": "10.0.0.193 - 10.0.0.222",
+      "broadcast": "10.0.0.223"
+    },
+    {
+      "name": "DMZ",
+      "needed": "10",
+      "allocated": "14",
+      "prefix": "/28",
+      "subnetAddress": "10.0.0.224",
+      "usableRange": "10.0.0.225 - 10.0.0.238",
+      "broadcast": "10.0.0.239"
+    }
+  ],
+  "postDeleteRows": [
+    "Engineering",
+    "Infrastructure",
+    "DMZ"
+  ]
+}

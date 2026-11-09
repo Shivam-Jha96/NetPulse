@@ -1,0 +1,23 @@
+{
+  "initialSettings": {
+    "title": "Workstation Configuration",
+    "currentTheme": "dark",
+    "hasThemeBtn": true,
+    "hasDbSection": true,
+    "isDbChecked": true,
+    "defaultDns": "1.1.1.1 (Cloudflare)",
+    "defaultInterval": "1000"
+  },
+  "persistedSettings": {
+    "dnsValue": "1.1.1.1 (Cloudflare)",
+    "pingValue": "1000",
+    "theme": "dark"
+  },
+  "pingMonitorState": {
+    "pingInterval": "1000"
+  },
+  "themeVerified": {
+    "lightTheme": "light",
+    "darkTheme": "dark"
+  }
+}

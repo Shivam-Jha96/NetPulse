@@ -1,0 +1,9 @@
+{
+  "dashboardData": {
+    "egressIp": "1.1.1.1",
+    "orgInfo": "Cloudflare, Inc. (AS13335) • San Jose, California, United States"
+  },
+  "ticketId": "IR-8492",
+  "reportGenerated": "D:\\Dev\\repos\\NetPulse\\tests\\e2e\\artifacts\\reports\\journey1_incident_response.html",
+  "durationMs": 10597.424500000001
+}

@@ -1,0 +1,21 @@
+{
+  "initialTheme": {
+    "dataTheme": "dark",
+    "bodyBg": "rgb(11, 15, 25)",
+    "bgApp": "#0b0f19",
+    "textPrimary": "#f8fafc"
+  },
+  "lightTheme": {
+    "dataTheme": "light",
+    "bgApp": "#f1f5f9",
+    "textPrimary": "#0f172a",
+    "accentCyan": "#0284c7",
+    "contrastRatio": "16.3:1"
+  },
+  "darkTheme": {
+    "dataTheme": "dark",
+    "bgApp": "#0b0f19",
+    "textPrimary": "#f8fafc",
+    "contrastRatio": "18.3:1"
+  }
+}

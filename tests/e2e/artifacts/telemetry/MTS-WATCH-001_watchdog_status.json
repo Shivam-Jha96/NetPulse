@@ -1,0 +1,30 @@
+{
+  "initialStatus": "IDLE / STOPPED",
+  "stoppedStatus": "IDLE / STOPPED",
+  "watchdogData": {
+    "targets": [
+      {},
+      {},
+      {},
+      {
+        "name": "Default Gateway",
+        "endpoint": "192.168.1.1",
+        "status": "HEALTHY",
+        "latency": "4.0 ms"
+      },
+      {
+        "name": "Primary DNS (Cloudflare)",
+        "endpoint": "1.1.1.1",
+        "status": "HEALTHY",
+        "latency": "20.1 ms"
+      },
+      {
+        "name": "Public Anchor (Google)",
+        "endpoint": "8.8.8.8",
+        "status": "HEALTHY",
+        "latency": "6.9 ms"
+      }
+    ],
+    "alertsHeader": "WATCHDOG DIAGNOSTIC THRESHOLDS"
+  }
+}

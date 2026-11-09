@@ -1,0 +1,183 @@
+{
+  "bootAndCdp": {
+    "status": "PASS",
+    "durationMs": 2987,
+    "targetTitle": "NetPulse — Network Diagnostics Workstation",
+    "tauriDefined": true,
+    "headerExists": true,
+    "screenshot": "D:\\Dev\\repos\\NetPulse\\tests\\e2e\\artifacts\\screenshots\\challenger_boot_verification.png"
+  },
+  "highConcurrencyPorts": {
+    "status": "PASS",
+    "cases": [
+      {
+        "name": "Extreme Concurrency (250 workers on 1.1.1.1)",
+        "success": true,
+        "durationMs": 860,
+        "data": {}
+      },
+      {
+        "name": "Invalid Port Values (-1, 0, 65536, 99999)",
+        "success": true,
+        "durationMs": 59,
+        "data": {}
+      },
+      {
+        "name": "Boundary port range (65530-65535, u16 max)",
+        "success": true,
+        "durationMs": 1512,
+        "data": {}
+      },
+      {
+        "name": "Malformed Port String Syntax (abc,,,,,!@#$)",
+        "success": true,
+        "durationMs": 1506,
+        "data": {}
+      },
+      {
+        "name": "Top-20 Port Preset on Gateway 192.168.1.1",
+        "success": true,
+        "durationMs": 1517,
+        "data": {}
+      }
+    ]
+  },
+  "rapidIpcBombardment": {
+    "status": "PASS",
+    "total": 50,
+    "fulfilled": 50,
+    "rejected": 0,
+    "durationMs": 30
+  },
+  "malformedIpSubnet": {
+    "status": "PASS",
+    "overflowHandled": true,
+    "boundaryRejected": true,
+    "vectors": [
+      {
+        "desc": "Default Route /0 (4,294,967,296 total addresses)",
+        "cidr": "0.0.0.0/0",
+        "success": true,
+        "totalHosts": "4294967296",
+        "usableHosts": "4294967294"
+      },
+      {
+        "desc": "Host Route /32 (Single address)",
+        "cidr": "10.0.0.1/32",
+        "success": true,
+        "totalHosts": "1",
+        "usableHosts": "1"
+      },
+      {
+        "desc": "Point-to-Point /31 (RFC 3021, 2 usable)",
+        "cidr": "192.168.1.1/31",
+        "success": true,
+        "totalHosts": "2",
+        "usableHosts": "2"
+      },
+      {
+        "desc": "Prefix /33 (Exceeds IPv4 32 boundary)",
+        "cidr": "192.168.1.1/33",
+        "success": false,
+        "error": "IPv4 prefix length /33 exceeds maximum 32"
+      },
+      {
+        "desc": "Negative prefix /-1",
+        "cidr": "192.168.1.1/-1",
+        "success": false,
+        "error": "Prefix '-1' is not a valid integer"
+      },
+      {
+        "desc": "Octets > 255",
+        "cidr": "999.999.999.999/24",
+        "success": false,
+        "error": "Invalid IP address '999.999.999.999'"
+      },
+      {
+        "desc": "Alphabetical characters",
+        "cidr": "not-an-ip/24",
+        "success": false,
+        "error": "Invalid IP address 'not-an-ip'"
+      },
+      {
+        "desc": "VLSM Exceeding Parent Subnet Capacity",
+        "cidr": "10.0.0.0/24",
+        "success": true,
+        "totalHosts": "256",
+        "usableHosts": "254"
+      },
+      {
+        "desc": "VLSM 0 Hosts",
+        "cidr": "10.0.0.0/24",
+        "success": true,
+        "totalHosts": "256",
+        "usableHosts": "254"
+      },
+      {
+        "desc": "Valid Multi-Tier VLSM",
+        "cidr": "10.0.0.0/24",
+        "success": true,
+        "totalHosts": "256",
+        "usableHosts": "254"
+      }
+    ]
+  },
+  "icmpTraceCancellation": {
+    "status": "PASS",
+    "sessionId": "0c79692f-8cd2-43de-854b-335a7c54b7e7",
+    "stopped": true
+  },
+  "icmpPingCancellation": {
+    "status": "PASS",
+    "sessionId": "572d0977-8ef8-4cd5-b17f-ec8e55377326",
+    "stopped": true
+  },
+  "watchdogRapidToggle": {
+    "status": "PASS",
+    "initialRunning": false,
+    "activeRunning": true,
+    "stoppedRunning": false,
+    "cycle2Stopped": false
+  },
+  "reportAndPcapValidation": {
+    "status": "PASS",
+    "formats": {
+      "HTML": {
+        "filename": "netpulse_audit_1_1_1_1_20261107_193351.html",
+        "mimeType": "text/html; charset=utf-8",
+        "sizeBytes": 5039,
+        "hasData": true
+      },
+      "CSV": {
+        "filename": "netpulse_ping_1_1_1_1_20261107_193351.csv",
+        "mimeType": "text/csv; charset=utf-8",
+        "sizeBytes": 141,
+        "hasData": true
+      },
+      "JSON": {
+        "filename": "netpulse_audit_1_1_1_1_20261107_193351.json",
+        "mimeType": "application/json; charset=utf-8",
+        "sizeBytes": 244,
+        "hasData": true
+      },
+      "PCAP": {
+        "filename": "netpulse_capture_1_1_1_1_20261107_193351.pcap",
+        "mimeType": "application/vnd.tcpdump.pcap",
+        "sizeBytes": 564,
+        "hasData": true,
+        "magicHex": "0xa1b2c3d4",
+        "version": "2.4",
+        "linkType": 1,
+        "actualByteLength": 564
+      }
+    }
+  },
+  "liveEgressDiscovery": {
+    "status": "PASS",
+    "data": {
+      "ip": "1.1.1.1",
+      "provider": "ip-api.com"
+    }
+  },
+  "overallDurationMs": 13926
+}
